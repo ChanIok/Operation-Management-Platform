@@ -9,7 +9,6 @@
       >
         <lay-out-aside></lay-out-aside>
       </el-aside>
-
       <div
         id="mask"
         v-if="isAsideFloatActive && !asideIsCollapse"
@@ -123,6 +122,8 @@ export default {
   }
   #main {
     padding: 0;
+    height: calc(100vh - 60px);
+    overflow: auto;
   }
   .asideFloat {
     position: absolute;
