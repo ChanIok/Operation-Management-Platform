@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--1. 包扫描-->
+    <context:component-scan base-package="com.hrm" />
+
+    <!--2. 加载mvc注解驱动-->
+    <mvc:annotation-driven  />
+
+  <!--  &lt;!&ndash;3. 配置视图解析器&ndash;&gt;
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       &lt;!&ndash; <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="suffix" value=".html"></property>&ndash;&gt;
+    </bean>-->
+
+    <!--批量扫描接口生成代理对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定接口所在的包-->
+        <property name="basePackage" value="com.hrm.dao" />
+    </bean>
+
+    <!--配置文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为 5MB -->
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
+
+    <!--解决DispatcherServlet拦截静态资源的问题-->
+    <mvc:default-servlet-handler />
+
+    <!--配置异常处理器-->
+    <bean id="sysExceptionResolver" class="com.hrm.handler.GlobalExceptionHandler"></bean>
+
+    <!--导入dao-->
+    <import resource="classpath:applicationContext-dao.xml" />
+</beans>
