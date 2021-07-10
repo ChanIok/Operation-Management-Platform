@@ -4,27 +4,27 @@
       default-active="1"
       :collapse="asideIsCollapse"
       @select="handleSelect"
+      :mode="menuMode"
       id="menu"
     >
       <el-menu-item index="1">
-        <i class="el-icon-user"></i>
-        <template #title>员工资料</template>
+        <template #title>首页</template>
       </el-menu-item>
       <el-menu-item index="2">
-        <i class="el-icon-document-checked"></i>
-        <template #title>考勤管理</template>
+        <i class="el-icon-s-shop"></i>
+        <template #title>业务超市</template>
       </el-menu-item>
       <el-menu-item index="3">
-        <i class="el-icon-coordinate"></i>
-        <template #title>人事管理</template>
+        <i class="el-icon-s-home"></i>
+        <template #title>体验中心</template>
       </el-menu-item>
       <el-menu-item index="4">
-        <i class="el-icon-document"></i>
-        <template #title>文档管理</template>
+        <i class="el-icon-s-custom"></i>
+        <template #title>我的产品</template>
       </el-menu-item>
       <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <template #title>系统管理</template>
+        <i class="el-icon-phone"></i>
+        <template #title>帮助支持</template>
       </el-menu-item>
     </el-menu>
   </div>
@@ -33,16 +33,18 @@
 <script>
 import store from "../../store";
 export default {
-  name: "LayOutAside",
+  name: "LayOutMenu",
   data() {
     return {
+      menuMode: "horizontal",
       asideIsCollapse: false,
       isAdmin: true,
       isHR: true,
       isFinance: true,
       isStaff: true,
       mapper: {
-        1: "/index/employee-info/personal-data",
+        1: "/index/presentation",
+        2: "/index/employee-info/personal-data",
       },
     };
   },
@@ -54,16 +56,31 @@ export default {
         this.$router.push(this.mapper[key]);
       }
     },
+    setMode(width) {
+      if (width < 1080) {
+        this.menuMode = "vertical";
+      } else {
+        this.menuMode = "horizontal";
+      }
+    },
   },
-  mounted() {},
+  mounted() {
+    this.setMode(window.innerWidth);
+  },
   computed: {
     getAsideIsCollapse() {
       return store.state.asideIsCollapse;
+    },
+    getWidth() {
+      return store.state.width;
     },
   },
   watch: {
     getAsideIsCollapse(newEvent) {
       this.asideIsCollapse = newEvent;
+    },
+    getWidth(width) {
+      this.setMode(width);
     },
   },
 };

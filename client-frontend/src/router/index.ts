@@ -1,16 +1,20 @@
 import * as VueRouter from 'vue-router';
 import auth from '../views/Auth.vue';
-import main from '../views/Main.vue';
+import index from '../views/Index.vue';
 import PersonalData from '../components/modules/employee-info/PersonalData.vue';
+import Presentation from '../components/modules/presentation/Presentation.vue';
 const routes = [
   { path: '/', component: auth },
   {
     path: '/index',
-    component: main,
+    component: index,
     children: [
       {
         path: 'employee-info/personal-data',
         component: PersonalData,
+      },  {
+        path: 'presentation',
+        component: Presentation,
       },
     ],
   },

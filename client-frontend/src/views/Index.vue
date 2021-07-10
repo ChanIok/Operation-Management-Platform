@@ -7,7 +7,7 @@
         :width="asideWidth"
         :class="{ asideFloat: isAsideFloatActive }"
       >
-        <lay-out-aside></lay-out-aside>
+        <lay-out-menu></lay-out-menu>
       </el-aside>
       <div
         id="mask"
@@ -20,12 +20,12 @@
 </template>
 
 <script lang='ts'>
-import LayOutAside from "../components/main/LayOutAside.vue";
+import LayOutMenu from "../components/main/LayOutMenu.vue";
 import LayOutHeader from "../components/main/LayOutHeader.vue";
 import LayOutMain from "../components/main/LayOutMain.vue";
 import store from "../store";
 export default {
-  name: "Main",
+  name: "Index",
   data() {
     return {
       asideIsCollapse: false,
@@ -34,20 +34,17 @@ export default {
       isAsideFloatActive: false,
     };
   },
-  components: { LayOutAside, LayOutHeader, LayOutMain },
+  components: { LayOutMenu, LayOutHeader, LayOutMain },
   methods: {
     resizeEvent() {
       if (this.resizeRun) {
         store.commit("setWidth", window.innerWidth);
-        if (window.innerWidth < 720) {
+        if (window.innerWidth < 1080) {
           this.isAsideFloatActive = true;
           this.asideWidth = "0";
-        } else {
-          this.isAsideFloatActive = false;
-        }
-        if (window.innerWidth < 1080) {
           store.commit("setAsideIsCollapse", true);
         } else {
+          this.isAsideFloatActive = false;
           store.commit("setAsideIsCollapse", false);
         }
 
@@ -74,11 +71,7 @@ export default {
     getAsideIsCollapse(newEvent) {
       this.asideIsCollapse = newEvent;
       if (this.asideIsCollapse) {
-        if (this.isAsideFloatActive) {
-          this.asideWidth = "0";
-        } else {
-          this.asideWidth = "64px";
-        }
+        this.asideWidth = "0";
       } else {
         if (this.isAsideFloatActive) {
         }
@@ -103,14 +96,17 @@ export default {
     z-index: 999;
   }
   #sider {
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: calc(100vh - 60px);
+    height: 100%;
+    @media screen and (min-width: 1080px) {
+      display: none;
 
-    @media screen and (min-width: 720px) {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: calc(100vh - 60px);
       transition-duration: 0.25s;
       transition-timing-function: linear;
     }
+
     z-index: 998;
   }
   #mask {

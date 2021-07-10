@@ -12,7 +12,10 @@
         @click="changeIsCollapse"
       ></i>
     </div>
-    <div id="title">高校人力资源管理系统</div>
+    <div id="title"></div>
+    <div id="menu-wrapper">
+      <lay-out-menu></lay-out-menu>
+    </div>
     <div id="user-wrapper">
       <i class="el-icon-user-solid"></i>
     </div>
@@ -20,14 +23,17 @@
 </template>
 
 <script>
+import LayOutMenu from "./LayOutMenu.vue";
 import store from "../../store";
 export default {
   name: "LayOutHeader",
   data() {
-    return { asideIsCollapse: false };
+    return {
+      asideIsCollapse: false,
+    };
   },
 
-  components: {},
+  components: { LayOutMenu },
   methods: {
     changeIsCollapse() {
       this.asideIsCollapse = !this.asideIsCollapse;
@@ -54,7 +60,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   line-height: 60px;
- 
+
   #aside-controller {
     cursor: pointer;
     font-size: 26px;
@@ -63,11 +69,19 @@ export default {
       transition-duration: 0.3s;
       transition-timing-function: ease-in-out;
     }
+    @media screen and (min-width: 1080px) {
+      display: none;
+    }
   }
   #title {
     font-weight: 800;
     font-size: 20px;
-    @media screen and (max-width: 380px){
+    @media screen and (max-width: 380px) {
+      display: none;
+    }
+  }
+  #menu-wrapper {
+    @media screen and (max-width: 1080px) {
       display: none;
     }
   }
