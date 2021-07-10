@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface IResponse {
   code: number;
-  msg: any;
+  data: any;
 }
 
 const baseURL: string = 'http://localhost:3000';

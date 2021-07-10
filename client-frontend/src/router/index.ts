@@ -3,6 +3,7 @@ import auth from '../views/Auth.vue';
 import index from '../views/Index.vue';
 import PersonalData from '../components/modules/employee-info/PersonalData.vue';
 import Presentation from '../components/modules/presentation/Presentation.vue';
+import Supports from '../components/modules/supports/Supports.vue';
 const routes = [
   { path: '/', component: auth },
   {
@@ -12,9 +13,14 @@ const routes = [
       {
         path: 'employee-info/personal-data',
         component: PersonalData,
-      },  {
+      },
+      {
         path: 'presentation',
         component: Presentation,
+      },
+      {
+        path: 'supports',
+        component: Supports,
       },
     ],
   },

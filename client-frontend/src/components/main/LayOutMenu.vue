@@ -45,6 +45,7 @@ export default {
       mapper: {
         1: "/index/presentation",
         2: "/index/employee-info/personal-data",
+        5:"/index/supports",
       },
     };
   },

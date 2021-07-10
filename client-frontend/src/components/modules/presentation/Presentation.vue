@@ -3,9 +3,9 @@
     <div id="container"></div>
     <div id="banner" :style="{ backgroundImage: 'url(' + banner + ')' }">
       <div id="content">
-        <div id="title">新人特惠</div>
+        <div id="title">移动云</div>
         <div id="second-title">
-          汇聚爆款云产品，精选云服务器1核2G低至 87.12元/年
+          5G时代，你身边的智慧云
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import banner from "../../../assets/images/modules/presentation/banner.jpg";
+import banner from "../../../assets/images/modules/presentation/banner-2.png";
 export default {
   name: "Presentation",
   data() {
@@ -165,6 +165,7 @@ export default {
     }
   }
   #footer {
+    font-size: 15px;
     margin-top: 10px;
     text-align: center;
     line-height: 30px;
@@ -183,7 +184,7 @@ export default {
       }
     }
     #record {
-      font-size: 14px;
+      font-size: 13px;
       color: rgba(65, 65, 65, 0.8);
     }
   }

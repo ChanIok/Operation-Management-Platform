@@ -40,8 +40,8 @@ let res = {
 
 // 返回格式
 export interface IResponse {
-  code: 0; //0为成功
-  msg: {
-
+  code: 0; //0为成功,1和其他异常
+  data: {
+    
   }
 }
