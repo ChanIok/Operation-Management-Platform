@@ -15,7 +15,7 @@ let res = {
 // 获取指定员工的所有信息
 let res = {
   code: 0,
-  msg:{
+  msg: {
     id: "2018080198207",
     name: "陈文轩",
     age: "21",
