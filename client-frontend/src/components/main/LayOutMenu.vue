@@ -43,9 +43,9 @@ export default {
       isFinance: true,
       isStaff: true,
       mapper: {
-        1: "/index/presentation",
-        2: "/index/employee-info/personal-data",
-        5:"/index/supports",
+        1: "/presentation",
+        2: "/employee-info/personal-data",
+        5:"/supports",
       },
     };
   },
