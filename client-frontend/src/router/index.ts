@@ -5,14 +5,12 @@ import PersonalData from '../components/modules/employee-info/PersonalData.vue';
 import Presentation from '../components/modules/presentation/Presentation.vue';
 import Supports from '../components/modules/supports/Supports.vue';
 const routes = [
-  { path: '/login', component: auth },
   {
     path: '/',
     redirect: '/presentation',
     component: index,
     children: [
       {
-     
         path: 'employee-info/personal-data',
         component: PersonalData,
       },
@@ -24,6 +22,10 @@ const routes = [
         path: 'supports',
         component: Supports,
       },
+      {
+         path: '/login',
+          component: auth
+         },
     ],
   },
 ];

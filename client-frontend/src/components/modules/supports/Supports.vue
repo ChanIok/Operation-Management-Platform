@@ -127,9 +127,9 @@
 </template>
 
 <script>
-import banner from "../../../assets/images/modules/presentation/banner-help.jpg";
+import banner from "../../../assets/images/modules/supports/banner-help.jpg";
 export default {
-  name: "Presentation",
+  name: "Supports",
   data() {
     return { banner };
   },

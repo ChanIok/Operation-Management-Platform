@@ -125,9 +125,12 @@ export default {
       //     console.log("error submit!!");
       //   }
       // });
-      this.$router.push("/index");
+      this.$router.push("/");
     },
     changeEvent(newEvent) {
+      if (newEvent === "alter") {
+        return;
+      }
       store.commit("setEvent", newEvent);
     },
   },

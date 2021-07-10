@@ -6,8 +6,6 @@
         id="auth-img-background"
         :style="{ backgroundImage: 'url(' + auth_background + ')' }"
       ></div>
-
-      <div class="auth-img-mask"></div>
     </div>
     <!-- 登录表 -->
     <div class="auth-card">
@@ -23,6 +21,10 @@
         class="alter-form"
         v-else-if="currentState === 'alter'"
       ></alter-form>
+    </div>
+    <div id="content">
+      <div id="title">移动云</div>
+      <div id="second-title">5G时代，你身边的智慧云</div>
     </div>
   </div>
 </template>
@@ -58,57 +60,93 @@ export default {
 
 <style lang="scss">
 .auth {
-  position: absolute;
+  // position: absolute;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   .auth-img-wrapper {
     width: 100%;
     height: 100%;
-    position: absolute;
     left: 0;
-    top: 0;
+    bottom: 0;
     #auth-img-background {
       width: 100%;
       height: 100%;
       background-repeat: no-repeat;
       background-size: cover;
-    }
-    .auth-img-mask {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba($color: #000000, $alpha: 0.05);
+      background-position: 50% 50%;
     }
   }
   .auth-card {
-    width: 50%;
-    max-width: 450px;
-    min-width: 350px;
+    width: 450px;
+    top: calc(50% - 250px);
+    right: 15%;
     position: absolute;
     display: flex;
-
+    box-sizing: border-box;
+    @media screen and(max-width:1080px) {
+      right: calc(50% - 275px);
+    }
+    @media screen and(max-width:720px ) {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      top: 0;
+      right: 0;
+      
+    }
+    @media screen and(max-height:720px ) {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      top: 0;
+      right: 0;
+     
+    }
     .login-form {
       width: 100%;
-      top: calc(50% - 300px);
       background-color: #fff;
       padding: 60px;
       box-sizing: border-box;
       box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
       border-radius: 5px;
+      overflow: auto;
+       @media screen and(max-width:720px) {
+         padding-top: 80px;
+      }
     }
     .regist-form {
-      width: 100%;
-      top: calc(50% - 350px);
-      background-color: #fff;
-      padding: 60px;
-      box-sizing: border-box;
-      box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
-      border-radius: 5px;
+      @extend .login-form;
+      @media screen and(min-width:720px) {
+        position: relative;
+        top: -50px;
+      }
+    }
+  }
+  #content {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    font-size: 28px;
+    @media screen and(max-width:1080px) {
+      display: none;
+    }
+    @media screen and(max-height:720px) {
+      display: none;
+    }
+    #title {
+      font-weight: 800;
+      font-size: 52px;
+      padding-bottom: 10px;
+      @media screen and (max-width: 720px) {
+        font-size: 28px;
+      }
+    }
+    padding-top: 100px;
+    padding-left: 100px;
+    @media screen and (max-width: 720px) {
+      padding-top: 50px;
+      padding-left: 40px;
+      padding-right: 20px;
     }
   }
 }

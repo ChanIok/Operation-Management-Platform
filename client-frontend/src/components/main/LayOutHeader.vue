@@ -16,7 +16,10 @@
     <div id="menu-wrapper">
       <lay-out-menu></lay-out-menu>
     </div>
-    <div id="user-wrapper">
+    <div id="user-wrapper" @click="clickUserButton">
+      <span id="user">
+        <span v-if="!logined"> 登录 </span>
+      </span>
       <i class="el-icon-user-solid"></i>
     </div>
   </div>
@@ -29,6 +32,7 @@ export default {
   name: "LayOutHeader",
   data() {
     return {
+      logined:false,
       asideIsCollapse: false,
     };
   },
@@ -38,7 +42,11 @@ export default {
     changeIsCollapse() {
       this.asideIsCollapse = !this.asideIsCollapse;
       store.commit("setAsideIsCollapse", this.asideIsCollapse);
-    },
+    },clickUserButton(){
+      if(!this.logined){
+        this.$router.push('./index/login');
+      }
+    }
   },
   mounted() {},
   computed: {
@@ -59,7 +67,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  line-height: 60px;
+  line-height: 55px;
 
   #aside-controller {
     cursor: pointer;
@@ -88,6 +96,20 @@ export default {
   #user-wrapper {
     font-size: 26px;
     cursor: pointer;
+
+    #user {
+      position: relative;
+      span {
+        font-size: 14px;
+        display: inline-block;
+        width: 30px;
+        right: 0;
+        position: absolute;
+        @media screen and (max-width: 720px) {
+          display: none;
+        }
+      }
+    }
     &:hover {
       color: #409eff;
       transition-duration: 0.2s;
