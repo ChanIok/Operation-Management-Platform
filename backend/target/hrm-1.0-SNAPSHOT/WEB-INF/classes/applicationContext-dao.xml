@@ -9,7 +9,7 @@
         <property name="username" value="root" />
         <property name="password" value="root" />
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/hrm" />
+        <property name="url" value="jdbc:mysql://localhost:3306/main" />
     </bean>
 
     <!--spring和mybatis整合的工厂bean-->

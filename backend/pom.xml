@@ -57,6 +57,13 @@
     <version>${mysql.version}</version>
   </dependency>
 
+    <!-- jwt -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.11.0</version>
+    </dependency>
+
   <!-- log start -->
   <dependency>
     <groupId>log4j</groupId>
@@ -123,6 +130,13 @@
       <version>2.9.0</version>
     </dependency>
 
+    <!--序列化-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.7</version>
+    </dependency>
+
     <!--文件上传组件的依赖-->
     <dependency>
       <groupId>commons-fileupload</groupId>
@@ -150,8 +164,14 @@
       <artifactId>dubbo</artifactId>
       <version>${dubbo.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
 
-</dependencies>
+  </dependencies>
 
 
   <build>

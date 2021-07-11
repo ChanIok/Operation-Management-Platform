@@ -12,13 +12,19 @@
     <context:component-scan base-package="com.hrm" />
 
     <!--2. 加载mvc注解驱动-->
-    <mvc:annotation-driven  />
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-  <!--  &lt;!&ndash;3. 配置视图解析器&ndash;&gt;
+    <!--3. 配置视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-       &lt;!&ndash; <property name="prefix" value="/WEB-INF/pages/"></property>
-        <property name="suffix" value=".html"></property>&ndash;&gt;
-    </bean>-->
+       <!-- <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="suffix" value=".html"></property>-->
+    </bean>
 
     <!--批量扫描接口生成代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -34,6 +40,15 @@
 
     <!--解决DispatcherServlet拦截静态资源的问题-->
     <mvc:default-servlet-handler />
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/client/user/*"/>
+<!--            <mvc:exclude-mapping path="/index.html"/>-->
+<!--            <mvc:exclude-mapping path="/auth/login"/>-->
+            <bean class="com.hrm.interceptor.JWTInterceptors"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--配置异常处理器-->
     <bean id="sysExceptionResolver" class="com.hrm.handler.GlobalExceptionHandler"></bean>

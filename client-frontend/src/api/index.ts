@@ -5,7 +5,7 @@ interface IResponse {
   data: any;
 }
 
-const baseURL: string = 'http://localhost:3000';
+const baseURL: string = 'http://localhost:8080';
 
 const api = axios.create({
   baseURL,
