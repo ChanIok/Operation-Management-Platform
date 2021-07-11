@@ -1,9 +1,6 @@
 package com.hrm.dao;
 
-import com.hrm.pojo.login;
-
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zjw
@@ -13,11 +10,11 @@ import java.util.Map;
  */
 public interface Login {
 
-    List<login> findAll();
+    List<com.hrm.pojo.Login> findAll();
 
     void DeletedById(String id);
 
-    void InsertByLogin(login loginPojo);
+    void InsertByLogin(com.hrm.pojo.Login loginPojo);
 
     String findById(String username);
 

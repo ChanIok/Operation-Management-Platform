@@ -6,20 +6,20 @@ package com.hrm.pojo;
  * @Date 2021/7/9
  * @Time 15:51
  */
-public class login {
+public class Login {
     private String id;
     private String username;
     private String password;
     private Integer permission;
 
-    public login(String id, String username, String password, Integer permission) {
+    public Login(String id, String username, String password, Integer permission) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.permission = permission;
     }
 
-    public login() {}
+    public Login() {}
 
     public String getId() {
         return id;

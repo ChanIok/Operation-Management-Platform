@@ -1,7 +1,7 @@
 package com.hrm.service;
 
 
-import com.hrm.pojo.login;
+import com.hrm.pojo.Login;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
  * @Time 15:54
  */
 public interface LoginService {
-    List<login> findAll();
+    List<Login> findAll();
 
     void DeletedById(String id);
 
     String findById(String username);
 
-    void InsertByLogin(login loginPojo);
+    void InsertByLogin(Login loginPojo);
 
     String findByPermission(String username);
 }

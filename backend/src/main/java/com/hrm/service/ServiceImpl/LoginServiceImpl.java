@@ -1,8 +1,7 @@
 package com.hrm.service.ServiceImpl;
 
 
-import com.hrm.dao.Login;
-import com.hrm.pojo.login;
+import com.hrm.pojo.Login;
 import com.hrm.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,10 @@ import java.util.List;
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private Login loginDao;
+    private com.hrm.dao.Login loginDao;
 
     @Override
-    public List<login> findAll() {
+    public List<Login> findAll() {
         return loginDao.findAll();
     }
 
@@ -38,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void InsertByLogin(login loginPojo) {
+    public void InsertByLogin(Login loginPojo) {
         loginDao.InsertByLogin(loginPojo);
     }
 
