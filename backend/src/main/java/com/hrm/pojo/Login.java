@@ -1,19 +1,23 @@
 package com.hrm.pojo;
 
+import com.alibaba.com.caucho.hessian.io.Serializer;
+
+import java.io.Serializable;
+
 /**
  * @author zjw
  * @package hrm
  * @Date 2021/7/9
  * @Time 15:51
  */
-public class Login {
-    private String id;
+public class Login implements Serializable {
+    private int user_id;
     private String username;
     private String password;
     private Integer permission;
 
-    public Login(String id, String username, String password, Integer permission) {
-        this.id = id;
+    public Login(int id, String username, String password, Integer permission) {
+        this.user_id = id;
         this.username = username;
         this.password = password;
         this.permission = permission;
@@ -21,12 +25,12 @@ public class Login {
 
     public Login() {}
 
-    public String getId() {
-        return id;
+    public int getId() {
+        return user_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        this.user_id = id;
     }
 
     public String getUsername() {
@@ -45,11 +49,11 @@ public class Login {
         this.password = password;
     }
 
-    public Integer getPermission() {
+    public int getPermission() {
         return permission;
     }
 
-    public void setPermission(Integer permission) {
+    public void setPermission(int permission) {
         this.permission = permission;
     }
 }

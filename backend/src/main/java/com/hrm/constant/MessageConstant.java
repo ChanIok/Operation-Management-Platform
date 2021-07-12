@@ -45,6 +45,9 @@ public interface MessageConstant {
     static final String LOGIN_OUT = "退出登录";
     static final String VERIFY_SUCCESS = "认证成功";
     static final String VERIFY_FAILURE = "认证失败";
+    static final String REGISTER_SUCCESS = "注册成功";
+    static final String REGISTER_FAILURE = "注册失败";
+    static final String REUSE_NAME = "用户名已用";
 
     static final String VALIDATECODE_ERROR = "验证码输入错误";
     static final String QUERY_ORDER_SUCCESS = "查询预约信息成功";

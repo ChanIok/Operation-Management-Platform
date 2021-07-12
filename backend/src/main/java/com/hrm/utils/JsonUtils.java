@@ -15,4 +15,8 @@ public class JsonUtils {
     public static JSONObject MapToJson(Map map){
         return new JSONObject(map);
     }
+
+    public  static String JsonObjToString(JSONObject jsonObj,String key){
+        return jsonObj.getString(key);
+    }
 }

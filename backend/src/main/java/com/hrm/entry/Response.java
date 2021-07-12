@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 
 public class Response {
-    public int code;//执行结果，true为执行成功 false为执行失败
+    public int code;//执行结果代码
     public HashMap<String, Object> data = new HashMap<>();
 
 }

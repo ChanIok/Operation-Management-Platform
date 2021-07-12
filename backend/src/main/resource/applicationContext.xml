@@ -41,16 +41,18 @@
     <!--解决DispatcherServlet拦截静态资源的问题-->
     <mvc:default-servlet-handler />
 
-    <mvc:interceptors>
+
+    <!--配置拦截器-->
+   <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/client/user/*"/>
-<!--            <mvc:exclude-mapping path="/index.html"/>-->
-<!--            <mvc:exclude-mapping path="/auth/login"/>-->
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/auth/**"/>
+            <mvc:exclude-mapping path="/index.html"/>
             <bean class="com.hrm.interceptor.JWTInterceptors"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!--配置异常处理器-->
+    <!-- 配置异常处理器-->
     <bean id="sysExceptionResolver" class="com.hrm.handler.GlobalExceptionHandler"></bean>
 
     <!--导入dao-->

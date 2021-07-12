@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    根标签mapper必须包含namespace属性，该属性的值就是对应Dao接口的全限命名
+-->
+<mapper namespace="com.hrm.dao.LoginDao">
+    <!--
+        每一个子标签，就对应Dao接口的一个方法
+        查询方法对应select标签
+        添加方法就对应insert标签
+        删除方法就对应delete标签
+        修改方法就对应update标签
+        标签的id是对应方法的名字
+    -->
+
+
+    <select id="findById" parameterType="String" resultType="String">
+        select password from user where username = #{username}
+    </select>
+
+    <select id="findByPermission" parameterType="String" resultType="String">
+        select permission from user where username = #{username}
+    </select>
+
+    <select id="findIdbyName" parameterType="String" resultType="int">
+        select user_id from user where username = #{username};
+    </select>
+
+    <insert id="registerUser" parameterType="Login" keyProperty="user_id" useGeneratedKeys="true">
+         insert into user(user_id,username,password,permission)
+        VALUE
+        (#{user_id}, #{username}, #{password}, #{permission})
+    </insert>
+
+    <insert id="setUserInfo" parameterType="UserInfo" keyProperty="user_id" useGeneratedKeys="true">
+         insert into user_info(user_id,phone_num,email)
+        VALUE
+        (#{user_id}, #{phone_num}, #{email})
+    </insert>
+
+</mapper>
