@@ -1,0 +1,323 @@
+<template>
+  <div id="mall">
+    <div id="banner" :style="{ backgroundImage: 'url(' + banner + ')' }">
+      <div id="content">
+        <div id="title">业务中心</div>
+        <div id="second-title">云与企业深度融合，创造数字化未来</div>
+      </div>
+    </div>
+    <div class="big-title">了解所有产品和业务</div>
+    <div id="container-main">
+      <el-affix target="#container-main" :offset="80" id="side-menu-wrapper">
+        <div id="side-menu">
+          <div class="menu-item" @click="goAnchor(1)">
+            <i class="el-icon-s-grid"></i>
+            <div class="product-descript">弹性计算</div>
+          </div>
+          <div class="menu-item" @click="goAnchor(2)">
+            <i class="el-icon-s-data"></i>
+            <div class="product-descript">存储</div>
+          </div>
+          <div class="menu-item" @click="goAnchor(3)">
+            <i class="el-icon-s-management"></i>
+            <div class="product-descript">数据库</div>
+          </div>
+          <div class="menu-item" @click="goAnchor(4)">
+            <i class="el-icon-s-claim"></i>
+            <div class="product-descript">安全</div>
+          </div>
+          <div class="menu-item" @click="goAnchor(5)">
+            <i class="el-icon-s-marketing"></i>
+            <div class="product-descript">大数据</div>
+          </div>
+          <div class="menu-item" @click="goAnchor(6)">
+            <i class="el-icon-share"></i>
+            <div class="product-descript">人工智能</div>
+          </div>
+        </div>
+      </el-affix>
+
+      <div id="product-list-wrapper">
+        <div
+          class="product-list-group"
+          v-for="(item, index) in products"
+          :key="index"
+        >
+          <div class="anchor" :id="`item${index + 1}`"></div>
+          <div class="title-type">{{ item.type }}</div>
+          <div
+            class="product-list-item"
+            v-for="(pItem, pIndex) in item.list"
+            :key="pIndex"
+            @click="clickProduct(pItem.productId)"
+          >
+            <el-card class="box-card">
+              <template #header>
+                <div class="card-header">
+                  <span>{{ pItem.productName }}</span>
+                </div>
+              </template>
+              <div class="card-content">
+                {{ pItem.introduction }}
+              </div>
+            </el-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-view />
+</template>
+<script>
+import banner from "../../../assets/images/modules/mall/banner.jpg";
+export default {
+  data() {
+    return {
+      banner,
+      products: [
+        {
+          type: "弹性计算",
+          list: [
+            {
+              productId: 1,
+              productName: "云服务器 ECS",
+              introduction:
+                "云服务器 ECS是一种弹性可伸缩的计算服务，助您降低 IT 成本，提升运维效率，使您更专注于核心业务创新。",
+            },
+            {
+              productId: 2,
+              productName: "弹性裸金属服务器",
+              introduction:
+                "一种可弹性伸缩的高性能计算服务，具有安全物理隔离的特点，分钟级的交付周期将提供给您实时的业务响应能力。",
+            },
+            {
+              productId: 3,
+              productName: "GPU 云服务器",
+              introduction:
+                "提供 GPU 算力的弹性计算服务，具有超强的计算能力，服务于深度学习、科学计算、图形可视化、视频处理多种应用场景。",
+            },
+          ],
+        },
+        {
+          type: "存储",
+          list: [
+            {
+              productId: 4,
+              productName: "块存储 EBS",
+              introduction:
+                "块存储是为云服务器ECS提供的低时延、持久性、高可靠的数据块级随机存储。",
+            },
+            {
+              productId: 5,
+              productName: "对象存储 OSS",
+              introduction:
+                "海量、安全、低成本、高可靠的云存储服务，提供99.9999999999%(12个9)的数据持久性。",
+            },
+            {
+              productId: 6,
+              productName: "文件存储 NAS",
+              introduction:
+                "移动云文件存储NAS是一个可共享访问，弹性扩展，高可靠，高性能的分布式文件系统。",
+            },
+          ],
+        },
+        {
+          type: "数据库",
+          list: [
+            {
+              productId: 7,
+              productName: "云数据库 RDS MySQL 版",
+              introduction:
+                "作为开源软件组合 LAMP（Linux + Apache + MySQL + Perl/PHP/Python） 中的重要一环，广泛应用于各类应用场景。",
+            },
+            {
+              productId: 8,
+              productName: "云数据库 Redis 版",
+              introduction:
+                "支持高可靠双机热备架构和性能灵活扩展的集群架构，可满足高读写性能场景、容量按需弹性变配的业务需求。",
+            },
+            {
+              productId: 9,
+              productName: "云数据库 MongoDB 版",
+              introduction:
+                "支持ReplicaSet和Sharding两种部署架构，具备安全审计，时间点备份等多项企业能力。",
+            },
+            {
+              productId: 10,
+              productName: "云数据库 HBase 版",
+              introduction:
+                "100%兼容开源HBase并深度扩展，支持海量数据下的实时存储、高并发吞吐、轻SQL分析、全文检索、时序时空查询等能力。",
+            },
+            {
+              productId: 11,
+              productName: "云数据库 Cassandra 版",
+              introduction:
+                "云数据库Cassandra版是稳定可靠的NoSQL分布式数据库服务，支持类SQL语法CQL，提供了安全、容灾、监控、备份恢复等企业级能力。",
+            },
+            {
+              productId: 12,
+              productName: "云原生数据湖分析 DLA",
+              introduction:
+                "云原生数据湖分析(Data Lake Analytics，简称DLA) 是完全弹性的架构，提供一站式的数据湖分析与计算服务。",
+            },
+          ],
+        },
+      ],
+    };
+  },
+
+  methods: {
+    goAnchor(index) {
+      let anchor = document.getElementById(`item${index}`);
+      if (anchor !== null) anchor.scrollIntoView();
+    },
+    clickProduct(index) {
+      this.$router.push(`/product/${index}`);
+    },
+  },
+  mounted() {
+    this.goAnchor(this.$route.params.id);
+  },
+
+};
+</script>
+<style  lang="scss" scoped>
+#mall {
+  height: 100%;
+  #banner {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    @media screen and (max-width: 720px) {
+      height: 200px;
+    }
+    #content {
+      #title {
+        font-weight: 800;
+        font-size: 38px;
+        padding-bottom: 10px;
+        @media screen and (max-width: 720px) {
+          font-size: 28px;
+        }
+      }
+      padding-top: 100px;
+      padding-left: 100px;
+      @media screen and (max-width: 720px) {
+        padding-top: 50px;
+        padding-left: 40px;
+        padding-right: 20px;
+      }
+    }
+    #second-title {
+      line-height: 30px;
+    }
+  }
+  .big-title {
+    padding: 40px 15% 20px 15%;
+    font-size: 32px;
+    margin-bottom: 20px;
+    @media screen and(max-width:720px) {
+      padding: 40px 20px 40px 40px;
+    }
+  }
+  #container-main {
+    padding: 0px 15% 40px 15%;
+    box-sizing: border-box;
+    display: flex;
+    @media screen and(max-width:720px) {
+      padding: 0px 20px 40px 20px;
+    }
+    #side-menu-wrapper {
+      width: 300px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      height: 360px;
+      @media screen and(max-width:1080px) {
+        width: 150px;
+      }
+      @media screen and(max-width:720px) {
+        width: 50px;
+      }
+      #side-menu {
+        width: 100%;
+        .menu-item {
+          height: 60px;
+          background-color: rgb(250, 250, 250);
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          @media screen and(max-width:720px) {
+            justify-content: center;
+          }
+
+          i {
+            font-size: 32px;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+          }
+          .product-descript {
+            padding-left: 20px;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+            @media screen and(max-width:720px) {
+              display: none;
+            }
+          }
+          &:hover {
+            color: #409eff;
+          }
+          &:hover .product-descript {
+            padding-left: 28px;
+          }
+        }
+      }
+    }
+    #product-list-wrapper {
+      flex-grow: 1;
+      .product-list-group {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        .anchor {
+          position: relative;
+          top: -30px;
+        }
+        .title-type {
+          width: 100%;
+          height: 30px;
+          line-height: 30px;
+          font-size: 30px;
+
+          margin-left: 15px;
+          margin-bottom: 15px;
+        }
+        .product-list-item {
+          padding: 10px;
+          cursor: pointer;
+          box-sizing: border-box;
+          width: 50%;
+          &:hover .card-header {
+            color: #409eff;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+          }
+          @media screen and(max-width:1080px) {
+            width: 100%;
+          }
+          .card-header {
+            font-weight: bold;
+          }
+          .card-content {
+            font-size: 15px;
+            color: #555555;
+            line-height: 23px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+ 

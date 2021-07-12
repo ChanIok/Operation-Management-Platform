@@ -4,39 +4,36 @@
     <div id="banner" :style="{ backgroundImage: 'url(' + banner + ')' }">
       <div id="content">
         <div id="title">移动云</div>
-        <div id="second-title">
-          5G时代，你身边的智慧云
-        </div>
+        <div id="second-title">5G时代，你身边的智慧云</div>
       </div>
     </div>
     <div id="container-main">
       <div id="main-title">丰富、安全、稳定的产品及服务</div>
       <div id="main-check">
-        查看全部云产品
-        <i>></i>
+        <router-link to="/mall">查看全部云产品 <i>></i></router-link>
       </div>
       <div id="main-product-container">
-        <div class="product">
+        <div class="product" @click="clickProduct(1)">
           <i class="el-icon-s-grid"></i>
           <div class="product-descript">弹性计算</div>
         </div>
-        <div class="product">
+        <div class="product" @click="clickProduct(2)">
           <i class="el-icon-s-data"></i>
           <div class="product-descript">存储</div>
         </div>
-        <div class="product">
+        <div class="product" @click="clickProduct(3)">
           <i class="el-icon-s-management"></i>
           <div class="product-descript">数据库</div>
         </div>
-        <div class="product">
+        <div class="product" @click="clickProduct(4)">
           <i class="el-icon-s-claim"></i>
           <div class="product-descript">安全</div>
         </div>
-        <div class="product">
+        <div class="product" @click="clickProduct(5)">
           <i class="el-icon-s-marketing"></i>
           <div class="product-descript">大数据</div>
         </div>
-        <div class="product">
+        <div class="product" @click="clickProduct(6)">
           <i class="el-icon-share"></i>
           <div class="product-descript">人工智能</div>
         </div>
@@ -60,10 +57,17 @@ import banner from "../../../assets/images/modules/presentation/banner-2.png";
 export default {
   name: "Presentation",
   data() {
-    return { banner };
+    return {
+      banner,
+    };
+  },
+  methods: {
+    clickProduct(index) {
+      this.$router.push(`/mall/${index}`);
+    },
   },
   components: {},
-  methods: {},
+
   mounted() {},
 };
 </script>
@@ -110,6 +114,16 @@ export default {
       margin-top: 50px;
       text-align: center;
       cursor: pointer;
+      a {
+        text-decoration: none;
+        color: #2c3e50;
+        &:hover {
+          color: #409eff;
+          transition-duration: 0.2s;
+          transition-timing-function: ease-in-out;
+        }
+      }
+
       i {
         text-align: right;
         width: 20px;
@@ -118,11 +132,7 @@ export default {
         transition-duration: 0.2s;
         transition-timing-function: ease-in-out;
       }
-      &:hover {
-        color: #409eff;
-        transition-duration: 0.2s;
-        transition-timing-function: ease-in-out;
-      }
+
       &:hover i {
         width: 40px;
       }

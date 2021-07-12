@@ -3,6 +3,8 @@ import auth from '../views/Auth.vue';
 import index from '../views/Index.vue';
 import PersonalData from '../components/modules/employee-info/PersonalData.vue';
 import Presentation from '../components/modules/presentation/Presentation.vue';
+import ShoppingMall from '../components/modules/mall/ShoppingMall.vue';
+import Product from '../components/modules/mall/Product.vue';
 import Supports from '../components/modules/supports/Supports.vue';
 const routes = [
   {
@@ -19,13 +21,21 @@ const routes = [
         component: Presentation,
       },
       {
+        path: 'mall/:id?',
+        component: ShoppingMall,
+      },
+      {
+        path: 'product/:id?',
+        component: Product,
+      },
+      {
         path: 'supports',
         component: Supports,
       },
       {
-         path: '/login',
-          component: auth
-         },
+        path: 'login',
+        component: auth,
+      },
     ],
   },
 ];

@@ -1,7 +1,7 @@
 <template>
-  <div id="menu-wrapper">
+  <div id="menu-wrapper" v-if="ifMenu">
     <el-menu
-      default-active="1"
+      :default-active="activeIndex"
       :collapse="asideIsCollapse"
       @select="handleSelect"
       :mode="menuMode"
@@ -36,25 +36,32 @@ export default {
   name: "LayOutMenu",
   data() {
     return {
+      ifMenu: true,
+      activeIndex: "1",
       menuMode: "horizontal",
       asideIsCollapse: false,
       isAdmin: true,
       isHR: true,
       isFinance: true,
       isStaff: true,
+
       mapper: {
         1: "/presentation",
-        2: "/employee-info/personal-data",
-        5:"/supports",
+        2: "/mall",
+        3: "/employee-info/personal-data",
+        5: "/supports",
       },
     };
   },
   components: {},
 
   methods: {
-    handleSelect(key, keyPath) {
+    handleSelect(key) {
       if (this.mapper[key] !== undefined) {
         this.$router.push(this.mapper[key]);
+        if (window.innerWidth < 1080) {
+          store.commit("setAsideIsCollapse", true);
+        }
       }
     },
     setMode(width) {
@@ -82,6 +89,15 @@ export default {
     },
     getWidth(width) {
       this.setMode(width);
+    },
+    $route() {
+      if (this.$route.path.indexOf("mall") !== -1) {
+        this.ifMenu = false;
+        this.$nextTick(() => {
+          this.ifMenu = true;
+          this.activeIndex = "2";
+        });
+      }
     },
   },
 };

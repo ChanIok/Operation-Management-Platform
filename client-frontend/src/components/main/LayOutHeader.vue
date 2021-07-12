@@ -13,7 +13,7 @@
       ></i>
     </div>
     <div id="title"></div>
-    <div id="menu-wrapper">
+    <div id="menu-wrapper" v-if="isShow">
       <lay-out-menu></lay-out-menu>
     </div>
     <div id="user-wrapper" @click="clickUserButton">
@@ -32,8 +32,9 @@ export default {
   name: "LayOutHeader",
   data() {
     return {
-      logined:false,
+      logined: false,
       asideIsCollapse: false,
+      isShow: false,
     };
   },
 
@@ -42,21 +43,37 @@ export default {
     changeIsCollapse() {
       this.asideIsCollapse = !this.asideIsCollapse;
       store.commit("setAsideIsCollapse", this.asideIsCollapse);
-    },clickUserButton(){
-      if(!this.logined){
-        this.$router.push('./index/login');
+    },
+    clickUserButton() {
+      if (!this.logined) {
+        this.$router.push("./index/login");
       }
-    }
+    },
+    setShow(width) {
+      if (width < 1080) {
+        this.isShow = false;
+      } else {
+        this.isShow = true;
+      }
+    },
   },
-  mounted() {},
+  mounted() {
+    this.setShow(window.innerWidth);
+  },
   computed: {
     getAsideIsCollapse() {
       return store.state.asideIsCollapse;
+    },
+    getWidth() {
+      return store.state.width;
     },
   },
   watch: {
     getAsideIsCollapse(newEvent) {
       this.asideIsCollapse = newEvent;
+    },
+    getWidth(width) {
+      this.setShow(width);
     },
   },
 };
@@ -68,7 +85,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   line-height: 55px;
-
+  background-color: #fff;
   #aside-controller {
     cursor: pointer;
     font-size: 26px;

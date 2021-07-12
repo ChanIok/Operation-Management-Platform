@@ -130,7 +130,7 @@ export default {
           console.log("error submit!!");
         }
       });
-      // this.$router.push("/");
+
     },
     changeEvent(newEvent) {
       if (newEvent === "alter") {
