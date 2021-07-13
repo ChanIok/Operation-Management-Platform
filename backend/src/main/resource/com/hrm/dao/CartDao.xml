@@ -5,4 +5,42 @@
 
 <mapper namespace="com.hrm.dao.CartDao">
 
+    <select id="checkCart" parameterType="Cart"  resultType="Cart">
+            select user_id,product_id,buy_count from shopping_cart where user_id = #{user_id} and product_id = #{product_id}
+    </select>
+
+    <update id="addCart" parameterType="Cart">
+    <selectKey resultType="int" keyProperty="user_id" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+        update shopping_cart set buy_count = buy_count + #{buy_count} where user_id = #{user_id} and product_id = #{product_id}
+    </update>
+
+    <update id="subCart" parameterType="Cart">
+        <selectKey resultType="int" keyProperty="user_id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        update shopping_cart set buy_count = buy_count - #{buy_count} where user_id = #{user_id} and product_id = #{product_id}
+    </update>
+
+    <insert id="insertCart" parameterType="Cart">
+        <selectKey resultType="int" keyProperty="user_id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into shopping_cart values(#{user_id},#{product_id},#{buy_count})
+    </insert>
+
+    <delete id="purchase" parameterType="Cart" >
+        delete  from shopping_cart where user_id = #{user_id} and product_id = #{product_id}
+    </delete>
+
+    <select id="checkProductNum" parameterType="int" resultType="int">
+        select surplus from product where product_id = #{product_id}
+    </select>
+
+    <update id="updateProduct" parameterType="Cart" >
+        update shopping_cart set buy_count = #{buy_count} where user_id = #{user_id} and product_id = #{product_id}
+    </update>
+
+
 </mapper>

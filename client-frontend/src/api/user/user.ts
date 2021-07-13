@@ -6,3 +6,8 @@ export function _hello() {
     url: '/user/hello',
   });
 }
+
+
+export async function _getUserInfo() {
+  return api({ method: 'GET', url: '/user/info' });
+}

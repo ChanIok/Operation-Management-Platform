@@ -1,4 +1,4 @@
-package com.hrm.dao;
+package com.hrm.service;
 
 import com.hrm.pojo.Cart;
 
@@ -6,9 +6,10 @@ import com.hrm.pojo.Cart;
  * @author zjw
  * @package backend
  * @Date 2021/7/12
- * @Time 10:18
+ * @Time 23:42
  */
-public interface CartDao {
+public interface CartService {
+
     //添加商品(已存在)
     int addCart(Cart cart);
 
@@ -17,6 +18,9 @@ public interface CartDao {
 
     //添加商品（不存在）
     int insertCart(Cart cart);
+
+    //查找是否用户购物车存在对应商品
+    Cart findById(int user_id);
 
     //查找是否用户购物车存在对应商品
     Cart checkCart(Cart cart);
@@ -29,4 +33,5 @@ public interface CartDao {
 
     //更新商品
     int updateProduct(Cart cart);
+
 }

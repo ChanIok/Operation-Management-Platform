@@ -51,7 +51,7 @@
 <script  >
 import store from "../../store";
 import { _login } from "../../api/auth/auth";
-  import { ElMessage } from 'element-plus';
+import { ElMessage } from "element-plus";
 export default {
   name: "LoginForm",
   data() {
@@ -113,7 +113,6 @@ export default {
       // 待拿到api
       this.$refs[LoginFormData].validate((valid) => {
         if (valid) {
-          console.log("submit!");
           _login(this.LoginFormData).then((res) => {
             if (res.data.token && res.code === 0) {
               localStorage.setItem("token", res.data.token);
@@ -123,14 +122,14 @@ export default {
                 type: "success",
               });
               this.$router.push("/");
+            } else {
+              ElMessage.error("登录失败！");
             }
           });
         } else {
-           ElMessage.error('登录失败！');
-          console.log("error submit!!");
+          ElMessage.error("登录失败！");
         }
       });
-
     },
     changeEvent(newEvent) {
       if (newEvent === "alter") {

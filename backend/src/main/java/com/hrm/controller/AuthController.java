@@ -77,7 +77,7 @@ public class AuthController {
     }
 
 
-    @RequestMapping("/register")
+    @RequestMapping("/regist")
     @ResponseBody
     public Object register(@RequestBody JSONObject jsonObj) {
 

@@ -9,8 +9,8 @@ interface IFavor {
 
 // 所有收藏
 interface IFavorites {
-  userID: string;
-  favorites: IFavor[];
+  type: string;
+  list: IFavor[];
 }
 
 // userID

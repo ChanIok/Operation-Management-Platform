@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 import store from "../../store";
 export default {
   name: "LayOutMenu",
@@ -49,6 +50,7 @@ export default {
         1: "/presentation",
         2: "/mall",
         3: "/employee-info/personal-data",
+        4: "user",
         5: "/supports",
       },
     };

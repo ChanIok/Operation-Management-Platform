@@ -25,7 +25,10 @@ public class JWTInterceptors implements HandlerInterceptor {
 
         HashMap<String, Object> map = new HashMap<>();
         HashMap<String, Object> data = new HashMap<>();
-
+//放行OPTIONS请求
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
         //获取请求头中的令牌
         String token = request.getHeader("token");
 
@@ -48,8 +51,6 @@ public class JWTInterceptors implements HandlerInterceptor {
 
         map.put("code", Constant.CODE_VERIFICATION_FAILED);  //设置状态
         map.put("data", data);  //设置状态
-
-        ThreadLocal<Object> objectThreadLocal = new ThreadLocal<>();
 
         //将map转换为json
         String json = new ObjectMapper().writeValueAsString(map);

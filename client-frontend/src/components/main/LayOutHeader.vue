@@ -56,9 +56,17 @@ export default {
         this.isShow = true;
       }
     },
+    checkLogin() {
+      if (localStorage.getItem('token') !==null) {
+        this.logined = true;
+      } else {
+        this.logined = false;
+      }
+    },
   },
   mounted() {
     this.setShow(window.innerWidth);
+    this.checkLogin();
   },
   computed: {
     getAsideIsCollapse() {

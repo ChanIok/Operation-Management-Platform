@@ -5,6 +5,7 @@ import PersonalData from '../components/modules/employee-info/PersonalData.vue';
 import Presentation from '../components/modules/presentation/Presentation.vue';
 import ShoppingMall from '../components/modules/mall/ShoppingMall.vue';
 import Product from '../components/modules/mall/Product.vue';
+import PersonalCenter from '../components/modules/user/PersonalCenter.vue';
 import Supports from '../components/modules/supports/Supports.vue';
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
       {
         path: 'supports',
         component: Supports,
+      },
+      {
+        path: 'user',
+        component: PersonalCenter,
       },
       {
         path: 'login',

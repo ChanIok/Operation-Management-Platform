@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    根标签mapper必须包含namespace属性，该属性的值就是对应Dao接口的全限命名
+-->
+<mapper namespace="com.hrm.dao.UserDao">
+    <!--
+        每一个子标签，就对应Dao接口的一个方法
+        查询方法对应select标签
+        添加方法就对应insert标签
+        删除方法就对应delete标签
+        修改方法就对应update标签
+        标签的id是对应方法的名字
+    -->
+
+
+    <select id="findUserInfoById" parameterType="int" resultType="map">
+        select user.user_id, user.permission, user.username, user_info.phone_num, user_info.email
+        from user,
+             user_info
+        where user.user_id = #{user_id}
+          and user.user_id = user_info.user_id
+    </select>
+
+
+</mapper>
