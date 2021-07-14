@@ -47,6 +47,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/auth/**"/>
+            <mvc:exclude-mapping path="/mall/**"/>
             <mvc:exclude-mapping path="/index.html"/>
             <bean class="com.hrm.interceptor.JWTInterceptors"/>
         </mvc:interceptor>

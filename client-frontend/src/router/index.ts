@@ -14,7 +14,7 @@ const routes = [
     component: index,
     children: [
       {
-        path: 'employee-info/personal-data',
+        path: 'personal-data',
         component: PersonalData,
       },
       {

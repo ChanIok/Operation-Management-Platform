@@ -9,6 +9,11 @@
         select * from product where product_id = #{product_id}
     </select>
 
+    <select id="listProductsByType" parameterType="string" resultType="Product">
+        select * from product where type = #{type}
+    </select>
+
+
     <update id="updateProductSurplus">
         update product set surplus = #{surplus} where product_id = #{product_id}
     </update>

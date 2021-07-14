@@ -12,7 +12,7 @@
         @click="changeIsCollapse"
       ></i>
     </div>
-    <div id="title">高校人力资源管理系统</div>
+    <div id="title">云业务综合运营支撑平台</div>
     <div id="user-wrapper">
       <i class="el-icon-user-solid"></i>
     </div>

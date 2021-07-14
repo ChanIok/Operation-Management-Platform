@@ -12,7 +12,7 @@ export default defineConfig({
     '/@/': pathResolve('src'),
   },
   server: {
-    port: 8090,
+    port: 9000,
     proxy: { '/api': { target: 'http://localhost:3000', changeOrigin: true } },
   },
 });

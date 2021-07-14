@@ -10,7 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7271fd57-8237-42f7-b5b5-10c1fe0b148f" name="Default Changelist" comment="Default Changelist">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/controller/MallController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/service/MallService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/service/ServiceImpl/MallServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/pojo/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/pojo/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resource/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/ProductDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-frontend/src/components/main/LayOutMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client-frontend/src/components/main/LayOutMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-frontend/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client-frontend/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage-frontend/1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutAside.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutAside.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutMain.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../manage-frontend/src/components/main/LayOutMain.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage-frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../manage-frontend/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +37,8 @@
         <option value="spring-beans.schema" />
         <option value="HTML File" />
         <option value="MybatisConfig" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -126,6 +140,7 @@
       </method>
     </configuration>
     <configuration name="Tomcat 9.0.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.48" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="12" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -242,7 +257,7 @@
       <workItem from="1626007890492" duration="16533000" />
       <workItem from="1626051567151" duration="21803000" />
       <workItem from="1626075145543" duration="6678000" />
-      <workItem from="1626199689852" duration="10174000" />
+      <workItem from="1626199689852" duration="14210000" />
     </task>
     <servers />
   </component>

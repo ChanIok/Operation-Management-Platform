@@ -8,19 +8,19 @@
     >
       <el-menu-item index="1">
         <i class="el-icon-user"></i>
-        <template #title>员工资料</template>
+        <template #title>产品管理</template>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-document-checked"></i>
-        <template #title>考勤管理</template>
+        <template #title>平台用户管理</template>
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-coordinate"></i>
-        <template #title>人事管理</template>
+        <template #title>交易订单管理</template>
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-document"></i>
-        <template #title>文档管理</template>
+        <template #title>体验订单管理</template>
       </el-menu-item>
       <el-menu-item index="5">
         <i class="el-icon-setting"></i>
