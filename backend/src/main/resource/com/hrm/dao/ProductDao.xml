@@ -14,6 +14,7 @@
     </select>
 
 
+
     <update id="updateProductSurplus">
         update product set surplus = #{surplus} where product_id = #{product_id}
     </update>

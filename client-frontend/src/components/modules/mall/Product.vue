@@ -8,10 +8,13 @@
     <trolley v-if="trolleyBool"></trolley>
     <div id="exit" v-if="trolleyBool" @click="trolleyExit()">×</div>
 
-    <div id="banner" :style="{ backgroundImage: 'url(' + bannerImg + ')' }">
+    <div
+      id="banner"
+      :style="{ backgroundImage: 'url(' + details.info.img_url + ')' }"
+    >
       <div id="content">
-        <div id="title">{{ productName }}</div>
-        <div id="second-title">{{ introduction }}</div>
+        <div id="title">{{ details.info.product_name }}</div>
+        <div id="second-title">{{ details.info.introduction }}</div>
         <div id="banner-button">
           <button class="button" @click="goAnchor('#par')">
             <span>立即购买</span>
@@ -38,15 +41,15 @@
         </div>
       </el-affix>
 
-      <div id="description-wrapper">
-        <div class="specification description-item">
+      <div id="details-wrapper">
+        <div class="specification details-item">
           <div class="anchor" id="par"></div>
           <div class="title">产品规格</div>
 
           <div class="list-wrapper">
             <div
               class="list-item"
-              v-for="(item, index) in description.specification"
+              v-for="(item, index) in details.specification"
               :key="index"
             >
               <el-card class="box-card" shadow="hover">
@@ -70,17 +73,17 @@
           </div>
         </div>
 
-        <div class="advantage description-item">
+        <div class="advantage details-item">
           <div class="anchor" id="adv"></div>
           <div class="title">产品优势</div>
           <div class="list-wrapper">
             <div
               class="list-item"
-              v-for="(item, index) in description.advantage"
+              v-for="(item, index) in details.advantage"
               :key="index"
             >
               <div class="adv-img-wrapper">
-                <img :src="item.imgUrl" class="adv-img" />
+                <img :src="item.img_url" class="adv-img" />
               </div>
               <div class="title">
                 {{ item.title }}
@@ -92,7 +95,7 @@
           </div>
         </div>
 
-        <div class="application description-item">
+        <div class="application details-item">
           <div class="anchor" id="apply"></div>
           <div class="title">应用场景</div>
           <div class="application-wrapper">
@@ -102,7 +105,7 @@
                   menuItem: true,
                   active: applicationIndex == indexMenu,
                 }"
-                v-for="(itemMenu, indexMenu) in description.application"
+                v-for="(itemMenu, indexMenu) in details.application"
                 :key="indexMenu"
                 @click="clickApplicationMenu(indexMenu)"
               >
@@ -111,7 +114,7 @@
             </div>
             <div class="application-body">
               <div class="application-img">
-                <img :src="applicationInfo.imgUrl" alt="..." />
+                <img :src="applicationInfo.img_url" alt="..." />
               </div>
               <div class="application-main">
                 <div class="title">
@@ -125,7 +128,7 @@
           </div>
         </div>
 
-        <div class="document description-item">
+        <div class="document details-item">
           <div class="anchor" id="docs"></div>
           <div class="title">技术文档</div>
           <div class="list-wrapper">
@@ -162,103 +165,38 @@
 
 <script>
 import trolley from "./Trolley.vue";
+import { _getProductDetails } from "../../../api/mall/mall";
 export default {
   data() {
     return {
-      productName: "云服务器 ECS",
-      introduction:
-        "云服务器 ECS是一种弹性可伸缩的计算服务，助您降低 IT 成本，提升运维效率，使您更专注于核心业务创新。",
-      detailname: "突发性能实例 t6",
-      note: "轻量低负载场景，20%CPU性能轻松覆盖",
-      description: {
+      details: {
         specification: [
           {
-            name: "突发性能实例 t6",
-            description:
-              "开发者成长计划补贴！轻量低负载场景，20%CPU性能轻松覆盖",
-            price: 552.0,
-          },
-          {
-            name: "突发性能实例 t5",
-            description: "20%性能基线，性价比之王！个人开发者建站必备",
-            price: 626.4,
-          },
-          {
-            name: "共享型实例s6",
-            description:
-              "100%性能基线，性能强劲，超高性价比，广泛适用于建站等轻量应用",
-            price: 840.0,
-          },
-          {
-            name: "轻量应用服务器 2核1G",
-            description: "一键上云，可视化面板。适个人建站等轻量场景",
-            price: 612.0,
-          },
-          {
-            name: "轻量应用服务器 2核2G",
-            description: "一键上云，可视化面板。适个人建站等轻量场景",
-            price: 1020.0,
+            name: "",
+            description: "",
+            price: "",
           },
         ],
         advantage: [
           {
-            title: "稳定",
-            content:
-              "单实例可用性达 99.975%，多可用区多实例可用性达 99.995%，云盘可靠性达 99.9999999%，可实现自动宕机迁移、快照备份",
-            imgUrl:
-              "https://img.alicdn.com/tfs/TB1K6SgzET1gK0jSZFrXXcNCXXa-128-128.png",
-          },
-          {
-            title: "弹性",
-            content:
-              "支持分钟级别创建1000台实例，多种弹性付费选择更贴合业务现状，同时带来弹性的扩容能力，实例与带宽均可随时升降配，云盘可扩容",
-            imgUrl:
-              "https://img.alicdn.com/tfs/TB1h_houqL7gK0jSZFBXXXZZpXa-128-128.png",
-          },
-          {
-            title: "高安全",
-            content:
-              "免费提供 DDoS 防护、木马查杀、防暴力破解等服务，通过多方国际安全认证，ECS云盘支持数据加密功能",
-            imgUrl:
-              "https://img.alicdn.com/tfs/TB1JhtxuAT2gK0jSZFkXXcIQFXa-128-128.png",
+            title: "",
+            content: "",
+            img_url: "",
           },
         ],
         application: [
           {
-            title: "通用Web应用",
-            content:
-              "大部分Web应用使用的架构，阿里云推荐C/G/R系列服务器，兼顾高效搭建使用及高性能处理能力",
-            imgUrl:
-              "https://img.alicdn.com/imgextra/i2/O1CN01FSrA5F1y9XLjVtMhl_!!6000000006536-2-tps-1360-1520.png",
-          },
-          {
-            title: "在线游戏",
-            content:
-              "高并发、瞬时计算量大的场景，阿里云推荐高主频及GPU服务器实现高计算性能与高图像渲染性能的需求",
-            imgUrl:
-              "https://img.alicdn.com/imgextra/i3/O1CN01G4Mtt91QTVgkjvX55_!!6000000001977-2-tps-1520-1360.png",
-          },
-          {
-            title: "大数据分析",
-            content:
-              "对于频繁对存储读取的大数据应用场景，阿里云推荐大数据实例及本地盘实例，主从节点皆有性能优异表现",
-            imgUrl:
-              "https://img.alicdn.com/imgextra/i1/O1CN01qvouya1QC6dgl7vKB_!!6000000001939-2-tps-1360-1520.png",
-          },
-          {
-            title: "深度学习",
-            content:
-              "对于持续且大量的人工神经网络计算的深度学习场景，阿里云推荐GPU实例及AMD实例，不但性能表现卓越，同时大量节省成本",
-            imgUrl:
-              "https://img.alicdn.com/imgextra/i2/O1CN01bYlY2i1JqgPqaKgOB_!!6000000001080-2-tps-1360-1360.png",
+            title: "",
+            content: "",
+            img_url: "",
           },
         ],
+        info: {
+          img_url: "",
+        },
       },
-      bannerImg:
-        "https://img.alicdn.com/imgextra/i4/O1CN01lt781o1mM6pL1V58A_!!6000000004939-1-tps-3840-740.gif",
 
       applicationIndex: 0,
-
       trolleyImgUrl:
         "https://img.alicdn.com/tfs/TB1SZr9khD1gK0jSZFyXXciOVXa-48-48.png",
       trolleyBool: 0,
@@ -267,6 +205,7 @@ export default {
   },
   mounted() {
     this.scrollToTop();
+    this.getProductDetails();
   },
   components: {
     trolley,
@@ -287,10 +226,24 @@ export default {
     scrollToTop() {
       document.getElementById("product-wrapper").scrollIntoView();
     },
+    getProductDetails() {
+      _getProductDetails(this.$route.params.id)
+        .then((res) => {
+          if (res.code === 0) {
+            console.log("获取产品详情成功！");
+            this.details = res.data.details;
+          } else {
+            ElMessage.error("获取产品详情失败！");
+          }
+        })
+        .catch((err) => {
+          ElMessage.error("获取产品详情失败！");
+        });
+    },
   },
   computed: {
     applicationInfo() {
-      return this.description.application[this.applicationIndex];
+      return this.details.application[this.applicationIndex];
     },
   },
 };
@@ -336,6 +289,12 @@ export default {
       }
       padding-top: 100px;
       padding-left: 100px;
+      padding-right: 50px;
+      @media screen and (max-width: 1080px) {
+        padding-top: 60px;
+        padding-left: 60px;
+        padding-right: 20px;
+      }
       @media screen and (max-width: 720px) {
         padding-top: 50px;
         padding-left: 40px;
@@ -344,6 +303,7 @@ export default {
       #second-title {
         line-height: 30px;
         margin-bottom: 30px;
+
         @media screen and (max-width: 720px) {
           display: none;
         }
@@ -403,9 +363,9 @@ export default {
         }
       }
     }
-    #description-wrapper {
+    #details-wrapper {
       margin-top: 40px;
-      .description-item {
+      .details-item {
         margin-bottom: 40px;
       }
       .anchor {
@@ -568,7 +528,7 @@ export default {
               box-sizing: border-box;
               padding: 20px;
               background-color: rgb(255, 255, 255);
-              border-radius:2px;
+              border-radius: 2px;
               cursor: pointer;
               box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08),
                 0 0 6px rgba(0, 0, 0, 0.04);
@@ -802,13 +762,13 @@ export default {
   background-size: 100%;
   background-repeat: no-repeat;
 }
-#productName {
+#details.info.product_name {
   padding-top: 2%;
   margin-left: 15%;
   width: 30%;
   font-size: 32px;
 }
-#introduction {
+#details.info.introduction {
   padding-top: 1%;
   margin-left: 15%;
   width: 30%;

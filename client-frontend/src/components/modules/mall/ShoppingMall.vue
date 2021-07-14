@@ -69,101 +69,14 @@
   <router-view />
 </template>
 <script>
+import { ElMessage } from "element-plus";
 import { _getProducts } from "../../../api/mall/mall";
 import banner from "../../../assets/images/modules/mall/banner.jpg";
 export default {
   data() {
     return {
       banner,
-      products: [
-        {
-          type: "弹性计算",
-          list: [
-            {
-              product_id: 1,
-              product_name: "云服务器 ECS",
-              introduction:
-                "云服务器 ECS是一种弹性可伸缩的计算服务，助您降低 IT 成本，提升运维效率，使您更专注于核心业务创新。",
-            },
-            {
-              product_id: 2,
-              product_name: "弹性裸金属服务器",
-              introduction:
-                "一种可弹性伸缩的高性能计算服务，具有安全物理隔离的特点，分钟级的交付周期将提供给您实时的业务响应能力。",
-            },
-            {
-              product_id: 3,
-              product_name: "GPU 云服务器",
-              introduction:
-                "提供 GPU 算力的弹性计算服务，具有超强的计算能力，服务于深度学习、科学计算、图形可视化、视频处理多种应用场景。",
-            },
-          ],
-        },
-        {
-          type: "存储",
-          list: [
-            {
-              product_id: 4,
-              product_name: "块存储 EBS",
-              introduction:
-                "块存储是为云服务器ECS提供的低时延、持久性、高可靠的数据块级随机存储。",
-            },
-            {
-              product_id: 5,
-              product_name: "对象存储 OSS",
-              introduction:
-                "海量、安全、低成本、高可靠的云存储服务，提供99.9999999999%(12个9)的数据持久性。",
-            },
-            {
-              product_id: 6,
-              product_name: "文件存储 NAS",
-              introduction:
-                "移动云文件存储NAS是一个可共享访问，弹性扩展，高可靠，高性能的分布式文件系统。",
-            },
-          ],
-        },
-        {
-          type: "数据库",
-          list: [
-            {
-              product_id: 7,
-              product_name: "云数据库 RDS MySQL 版",
-              introduction:
-                "作为开源软件组合 LAMP（Linux + Apache + MySQL + Perl/PHP/Python） 中的重要一环，广泛应用于各类应用场景。",
-            },
-            {
-              product_id: 8,
-              product_name: "云数据库 Redis 版",
-              introduction:
-                "支持高可靠双机热备架构和性能灵活扩展的集群架构，可满足高读写性能场景、容量按需弹性变配的业务需求。",
-            },
-            {
-              product_id: 9,
-              product_name: "云数据库 MongoDB 版",
-              introduction:
-                "支持ReplicaSet和Sharding两种部署架构，具备安全审计，时间点备份等多项企业能力。",
-            },
-            {
-              product_id: 10,
-              product_name: "云数据库 HBase 版",
-              introduction:
-                "100%兼容开源HBase并深度扩展，支持海量数据下的实时存储、高并发吞吐、轻SQL分析、全文检索、时序时空查询等能力。",
-            },
-            {
-              product_id: 11,
-              product_name: "云数据库 Cassandra 版",
-              introduction:
-                "云数据库Cassandra版是稳定可靠的NoSQL分布式数据库服务，支持类SQL语法CQL，提供了安全、容灾、监控、备份恢复等企业级能力。",
-            },
-            {
-              product_id: 12,
-              product_name: "云原生数据湖分析 DLA",
-              introduction:
-                "云原生数据湖分析(Data Lake Analytics，简称DLA) 是完全弹性的架构，提供一站式的数据湖分析与计算服务。",
-            },
-          ],
-        },
-      ],
+      products: [],
     };
   },
 
@@ -181,6 +94,9 @@ export default {
           if (res.code === 0) {
             console.log("获取所有产品成功！");
             this.products = res.data.products;
+            this.$nextTick(() => {
+              this.goAnchor(this.$route.params.id);
+            });
           } else {
             ElMessage.error("获取所有产品失败！");
           }
@@ -191,7 +107,6 @@ export default {
     },
   },
   mounted() {
-    this.goAnchor(this.$route.params.id);
     this.getProducts();
   },
 };

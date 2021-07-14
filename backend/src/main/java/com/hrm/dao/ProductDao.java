@@ -13,11 +13,14 @@ import java.util.List;
 
 public interface ProductDao {
 
-    //根据product_id查找信息
+    //根据ID获取产品基本信息
     Product findById(int product_id);
 
     //更新产品剩余量
     int updateProductSurplus(Product product);
 
+
+//    根据类型获取该类型所有产品的基本信息
     List<Product> listProductsByType(String type);
+
 }

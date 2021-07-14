@@ -1,2 +1,10 @@
-package com.hrm.dao;public interface ApplicationDao {
+package com.hrm.dao;
+
+import com.hrm.pojo.Application;
+
+
+import java.util.List;
+
+public interface ApplicationDao {
+    List<Application> listApplicationsByProductId(int product_id);
 }

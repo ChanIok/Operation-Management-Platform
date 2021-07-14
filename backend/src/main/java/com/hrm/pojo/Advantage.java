@@ -1,9 +1,18 @@
 package com.hrm.pojo;
 
-public class Specification {
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Advantage {
     private int product_id;
-    private int specification_id;
-    private String name;
-    private int price;
-    private String description;
+    private String title;
+    private String content;
+    private String img_url;
 }

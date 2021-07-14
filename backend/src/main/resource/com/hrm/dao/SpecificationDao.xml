@@ -3,11 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hrm.dao.AdvantageDao">
+<mapper namespace="com.hrm.dao.SpecificationDao">
 
-
-    <select id="listAdvantagesByProductId" parameterType="int" resultType="Advantage">
-        select * from advantage where product_id = #{product_id}
+    <select id="listSpecificationsByProductId" parameterType="int" resultType="Specification">
+        select * from specification where product_id = #{product_id}
     </select>
 
 </mapper>

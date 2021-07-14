@@ -2,6 +2,7 @@ package com.hrm.controller;
 
 import com.hrm.constant.Constant;
 import com.hrm.entry.Response;
+import com.hrm.pojo.Advantage;
 import com.hrm.pojo.Product;
 import com.hrm.service.MallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,26 @@ public class MallController {
         }
 
         res.code = Constant.CODE_SUCCESS;
-        res.data.put("message", "已返回产品");
+        res.data.put("message", "已返回所有产品");
         res.data.put("products", products);
+        return res;
+    }
+
+    @RequestMapping("/products/{product_id}")
+    @ResponseBody
+
+    public Object getProductDetails(@PathVariable("product_id") String product_id) {
+        HashMap<String, Object> details = new HashMap<>();
+        String[] types = {"specification", "advantage", "application"};
+//        创建响应类
+        Response res = new Response();
+        details.put("info", mallService.fineProductById(Integer.parseInt(product_id)));
+        details.put(types[0], mallService.listSpecificationsByProductId(Integer.parseInt(product_id)));
+        details.put(types[1], mallService.listAdvantagesByProductId(Integer.parseInt(product_id)));
+        details.put(types[2], mallService.listApplicationsByProductId(Integer.parseInt(product_id)));
+        res.code = Constant.CODE_SUCCESS;
+        res.data.put("details", details);
+        res.data.put("message", "已返回产品详情");
         return res;
     }
 }
