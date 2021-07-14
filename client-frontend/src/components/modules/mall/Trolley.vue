@@ -53,7 +53,7 @@
           合计：
           <span> ￥{{ totalPrice }} </span>
         </div>
-        <div class="pay"><el-button>支付</el-button></div>
+        <div class="pay"><el-button @click="doSettlement">支付</el-button></div>
       </div>
     </el-drawer>
   </div>
@@ -81,6 +81,14 @@ export default {
           specification_name: "突发性能实例 t6",
           number: 1,
           price: 998,
+        },
+        {
+          product_id: 1,
+          specification_id: 2,
+          product_name: "云服务器ECS",
+          specification_name: "突发性能实例 s6",
+          number: 3,
+          price: 1088,
         },
       ],
     };
@@ -121,6 +129,12 @@ export default {
       };
       localStorage.setItem("trolley", JSON.stringify(trolleyWrapper));
     },
+    doSettlement() {
+      this.$router.push({
+        path: "/settlement",
+        query: { return: this.$route.path },
+      });
+    },
   },
   computed: {
     totalPrice() {
@@ -147,7 +161,6 @@ export default {
           item.product_id === val.product_id &&
           item.specification_id === val.specification_id
         ) {
-    
           item.number++;
           this.isTrolleyShow = true;
           this.saveTrolley();

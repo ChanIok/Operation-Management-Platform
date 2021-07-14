@@ -1,9 +1,6 @@
 <template>
   <div id="product-wrapper" style="width: 100%; height: 800px">
-    <trolley
-      
-      :productInCart="productInCart"
-    ></trolley>
+    <trolley :productInCart="productInCart"></trolley>
 
     <div
       id="banner"
@@ -202,7 +199,6 @@ export default {
 
       applicationIndex: 0,
 
- 
       price: 469.2,
     };
   },
@@ -296,23 +292,26 @@ export default {
           font-size: 28px;
         }
       }
-      padding-top: 100px;
-      padding-left: 100px;
+      padding-top: 80px;
+      padding-left: 80px;
       padding-right: 50px;
       @media screen and (max-width: 1080px) {
-        padding-top: 60px;
-        padding-left: 60px;
-        padding-right: 20px;
-      }
-      @media screen and (max-width: 720px) {
-        padding-top: 50px;
+        padding-top: 40px;
         padding-left: 40px;
         padding-right: 20px;
       }
+      @media screen and (max-width: 720px) {
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 20px;
+      }
       #second-title {
-        line-height: 30px;
-        margin-bottom: 30px;
+        line-height: 28px;
 
+        width: 60%;
+        @media screen and (max-width: 1080px) {
+          margin-bottom: 10px;
+        }
         @media screen and (max-width: 720px) {
           display: none;
         }
