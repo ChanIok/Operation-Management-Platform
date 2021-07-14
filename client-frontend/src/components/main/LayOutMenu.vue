@@ -31,7 +31,6 @@
 </template>
 
 <script>
-
 import store from "../../store";
 export default {
   name: "LayOutMenu",
@@ -73,9 +72,31 @@ export default {
         this.menuMode = "horizontal";
       }
     },
+    setIndexActive() {
+      if (this.$route.path.indexOf("mall") !== -1) {
+        this.ifMenu = false;
+        this.$nextTick(() => {
+          this.ifMenu = true;
+          this.activeIndex = "2";
+        });
+      } else if (this.$route.path.indexOf("user") !== -1) {
+        this.ifMenu = false;
+        this.$nextTick(() => {
+          this.ifMenu = true;
+          this.activeIndex = "4";
+        });
+      } else if (this.$route.path.indexOf("supports") !== -1) {
+        this.ifMenu = false;
+        this.$nextTick(() => {
+          this.ifMenu = true;
+          this.activeIndex = "5";
+        });
+      }
+    },
   },
   mounted() {
     this.setMode(window.innerWidth);
+    this.setIndexActive();  
   },
   computed: {
     getAsideIsCollapse() {
@@ -93,13 +114,7 @@ export default {
       this.setMode(width);
     },
     $route() {
-      if (this.$route.path.indexOf("mall") !== -1) {
-        this.ifMenu = false;
-        this.$nextTick(() => {
-          this.ifMenu = true;
-          this.activeIndex = "2";
-        });
-      }
+      this.setIndexActive();
     },
   },
 };

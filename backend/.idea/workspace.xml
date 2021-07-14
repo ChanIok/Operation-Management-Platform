@@ -10,24 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7271fd57-8237-42f7-b5b5-10c1fe0b148f" name="Default Changelist" comment="Default Changelist">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/service/ServiceImpl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hrm/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/UserDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/dao/CartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/dao/CartDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/dao/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/interceptor/JWTInterceptors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/interceptor/JWTInterceptors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hrm/pojo/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hrm/pojo/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/CartDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/CartDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/com/hrm/dao/Login.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client-frontend/src/api/favor/favor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client-frontend/src/api/favor/favor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client-frontend/src/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client-frontend/src/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client-frontend/src/api/user/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client-frontend/src/components/auth/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../client-frontend/src/components/auth/LoginForm.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +242,7 @@
       <workItem from="1626007890492" duration="16533000" />
       <workItem from="1626051567151" duration="21803000" />
       <workItem from="1626075145543" duration="6678000" />
-      <workItem from="1626199689852" duration="9582000" />
+      <workItem from="1626199689852" duration="10174000" />
     </task>
     <servers />
   </component>

@@ -121,7 +121,7 @@ export default {
                 message: "登陆成功！",
                 type: "success",
               });
-              this.$router.push("/");
+              this.$router.push(this.$route.query.return);
             } else {
               ElMessage.error("登录失败！");
             }

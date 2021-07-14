@@ -16,11 +16,12 @@
     <div id="menu-wrapper" v-if="isShow">
       <lay-out-menu></lay-out-menu>
     </div>
-    <div id="user-wrapper" @click="clickUserButton">
+    <div id="user-wrapper" @click="clickUserButton" ref="userWrapper">
       <span id="user">
         <span v-if="!logined"> 登录 </span>
       </span>
       <i class="el-icon-user-solid"></i>
+      <div id="exit-wrapper" v-if="isExitWrapper" @click="exitLogin">退出</div>
     </div>
   </div>
 </template>
@@ -35,6 +36,7 @@ export default {
       logined: false,
       asideIsCollapse: false,
       isShow: false,
+      isExitWrapper: false,
     };
   },
 
@@ -46,7 +48,14 @@ export default {
     },
     clickUserButton() {
       if (!this.logined) {
-        this.$router.push("./index/login");
+        let currentPath = this.$route.path;
+        console.log(currentPath);
+        this.$router.push({
+         path: "/login",
+         query: { return: currentPath },
+        });
+      } else {
+        this.isExitWrapper = !this.isExitWrapper;
       }
     },
     setShow(width) {
@@ -57,16 +66,25 @@ export default {
       }
     },
     checkLogin() {
-      if (localStorage.getItem('token') !==null) {
+      if (localStorage.getItem("token") !== null) {
         this.logined = true;
       } else {
         this.logined = false;
       }
     },
+    exitLogin() {
+      localStorage.removeItem("token");
+      this.isExitWrapper = false;
+      this.$router.go(0);
+    },
   },
   mounted() {
     this.setShow(window.innerWidth);
     this.checkLogin();
+    document.addEventListener("click", (e) => {
+      if (!document.getElementById("user-wrapper").contains(e.target))
+        this.isExitWrapper = false;
+    });
   },
   computed: {
     getAsideIsCollapse() {
@@ -82,6 +100,9 @@ export default {
     },
     getWidth(width) {
       this.setShow(width);
+    },
+    $route() {
+      this.checkLogin();
     },
   },
 };
@@ -121,7 +142,7 @@ export default {
   #user-wrapper {
     font-size: 26px;
     cursor: pointer;
-
+    position: relative;
     #user {
       position: relative;
       span {
@@ -133,12 +154,35 @@ export default {
         @media screen and (max-width: 720px) {
           display: none;
         }
+        &:hover {
+          color: #409eff;
+          transition-duration: 0.2s;
+          transition-timing-function: ease-in-out;
+        }
       }
     }
-    &:hover {
-      color: #409eff;
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
+    i {
+      &:hover {
+        color: #409eff;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+      }
+    }
+
+    #exit-wrapper {
+      position: absolute;
+      top: 55px;
+      right: -20px;
+      width: 80px;
+      font-size: 18px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+      &:hover {
+        color: #409eff;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+      }
     }
   }
 }

@@ -2,9 +2,8 @@
   <div id="personal-data">
     <div id="header">
       <div id="title">个人信息</div>
-      <el-button @click="getUserInfo" id="editButton">刷新</el-button>
+
       <el-button @click="enterEdit" id="editButton">编辑</el-button>
-      <el-button @click="exitLogin" id="editButton">退出登录</el-button>
     </div>
     <el-card class="box-card" id="base-info">
       <template #header>
@@ -181,19 +180,18 @@ export default {
   components: {},
   methods: {
     getUserInfo() {
-      if (localStorage.getItem('token')  === null) {
-        this.$router.push("/login");
+      if (localStorage.getItem("token") === null) {
+        this.$router.push({
+          path: "/login",
+          query: { return: "user" },
+        });
         return;
       }
       _getUserInfo()
         .then((res) => {
           if (res.code === 0) {
-            ElMessage.success({
-              message: "获取个人信息成功！",
-              type: "success",
-            });
+            console.log("获取个人信息成功！");
             this.info = res.data.userInfo;
-            console.log(res.data);
           } else {
             ElMessage.error("获取个人信息失败！");
           }
@@ -202,9 +200,7 @@ export default {
           ElMessage.error("获取个人信息失败！");
         });
     },
-    exitLogin() {
-      localStorage.removeItem("token");
-    },
+
     setColumnSize(width) {
       if (width < 720) {
         this.columnSize = 1;
