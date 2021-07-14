@@ -4,23 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-/**
- * @author zjw
- * @package backend
- * @Date 2021/7/12
- * @Time 10:21
- */
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Transaction {
+    private Integer trade_tr_id;
     private Integer user_id;
     private Integer product_id;
-    private Integer buy_count;
     private Integer specification_id;
+    private String product_name;
+    private String transaction_time;
+    private Integer number;
+    private String authority_time;
 }

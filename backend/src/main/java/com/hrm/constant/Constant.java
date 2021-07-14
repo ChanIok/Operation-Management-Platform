@@ -18,4 +18,5 @@ public interface Constant {
     int CODE_LOGIN_FAILED = 4;      //登录失败,用户名和密码不符
     int CODE_REGISTER_USERNAME_DUPLICATE = 5;      //注册失败，用户名重复
     int CODE_REGISTER_DATABASE_OP_FAILED = 6;      //注册失败，数据库操作错误
+    int CODE_UPDATE_SHOPPING_CART = 7;      //更新购物车失败，数据库操作错误
 }

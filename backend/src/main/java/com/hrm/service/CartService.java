@@ -1,6 +1,10 @@
 package com.hrm.service;
 
 import com.hrm.pojo.Cart;
+import com.hrm.pojo.ID;
+import com.hrm.pojo.ShowShopping;
+
+import java.util.ArrayList;
 
 /**
  * @author zjw
@@ -34,4 +38,9 @@ public interface CartService {
     //更新商品
     int updateProduct(Cart cart);
 
+    //删除商品
+    int deleteProduct(Cart cart);
+
+    //向前端提供用户购物车情况
+    ArrayList<ShowShopping> entryCart(ID id);
 }

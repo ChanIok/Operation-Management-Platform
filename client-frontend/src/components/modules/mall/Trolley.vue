@@ -40,7 +40,7 @@
                 </div>
                 <div class="num-button">
                   <i class="el-icon-minus" @click="subNum(item, index)"></i>
-                  <span class="num-counts"> {{ item.number }}</span>
+                  <span class="num-counts"> {{ item.buy_count }}</span>
                   <i class="el-icon-plus" @click="addNum(item)"></i>
                 </div>
               </div>
@@ -79,7 +79,7 @@ export default {
           specification_id: 7,
           product_name: "云服务器ECS",
           specification_name: "突发性能实例 t6",
-          number: 1,
+          buy_count: 1,
           price: 998,
         },
         {
@@ -87,7 +87,7 @@ export default {
           specification_id: 2,
           product_name: "云服务器ECS",
           specification_name: "突发性能实例 s6",
-          number: 3,
+          buy_count: 3,
           price: 1088,
         },
       ],
@@ -100,12 +100,12 @@ export default {
       this.isActive = val.currentTarget.id;
     },
     addNum(item) {
-      item.number++;
+      item.buy_count++;
       this.saveTrolley();
     },
     subNum(item, index) {
-      item.number--;
-      if (item.number <= 0) {
+      item.buy_count--;
+      if (item.buy_count <= 0) {
         this.trolley.splice(index, 1);
       }
       this.saveTrolley();
@@ -140,7 +140,7 @@ export default {
     totalPrice() {
       let sum = 0;
       for (let item of this.trolley) {
-        sum += item.number * item.price;
+        sum += item.buy_count * item.price;
       }
       return sum;
     },
@@ -161,7 +161,7 @@ export default {
           item.product_id === val.product_id &&
           item.specification_id === val.specification_id
         ) {
-          item.number++;
+          item.buy_count++;
           this.isTrolleyShow = true;
           this.saveTrolley();
           return;
@@ -172,7 +172,7 @@ export default {
         specification_id: val.specification_id,
         product_name: val.product_name,
         specification_name: val.specification_name,
-        number: 1,
+        buy_count: 1,
         price: val.price,
       };
       this.trolley.push(item);

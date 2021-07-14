@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hrm.dao.TransactionDao">
+    <insert id="insertTransaction" parameterType="Transaction" >
+        <selectKey order="AFTER" keyProperty="trade_tr_id" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into transaction value (#{trade_tr_id},#{user_id},#{product_id},#{specification_id},
+        #{product_name},#{transaction_time},#{number},#{authority_time})
+    </insert>
+</mapper>
