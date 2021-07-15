@@ -28,4 +28,14 @@ public class BalanceServiceImpl implements BalanceService {
     public int updateMoneyById(Balance balance) {
         return balanceDao.updateMoneyById(balance);
     }
+
+    @Override
+    public int checkUser(int user_id) {
+        return balanceDao.checkUser(user_id);
+    }
+
+    @Override
+    public int addBalance(int user_id) {
+        return balanceDao.addBalance(user_id);
+    }
 }

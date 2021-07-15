@@ -10,14 +10,30 @@
     </select>
 
     <select id="listProductsByType" parameterType="string" resultType="Product">
-        select * from product where product_type = #{product_type}
+        select * from product where type = #{type}
     </select>
-
-
 
     <update id="updateProductSurplus">
         update product set surplus = #{surplus} where product_id = #{product_id}
     </update>
 
-<!--    <select id="findNameById" parameterType="int" resultType=""-->
+    <insert id="insertProduct" parameterType="Product">
+        <selectKey resultType="int" keyProperty="product_id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into product values(#{product_id},#{product_name},#{introduction},#{type},#{img_url})
+    </insert>
+
+    <delete id="deleteProduct" parameterType="Product" >
+        delete  from application  where  product_id = #{product_id}
+        delete  from advantage  where  product_id = #{product_id}
+        delete  from specification  where  product_id = #{product_id}
+        delete  from product where  product_id = #{product_id}
+    </delete>
+
+    <update id="updateProduct" parameterType="Product" >
+        update product set product_name = #{product_name},introduction = #{introduction}, product_type = #{product_type},img_url = #{img_url}  where  product_id = #{product_id}
+    </update>
+
+
 </mapper>

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Specification {
     private int product_id;
     private int specification_id;
-    private String name;
+    private String specification_name;
     private int price;
     private String description;
 }

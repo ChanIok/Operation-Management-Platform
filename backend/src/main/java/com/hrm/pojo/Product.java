@@ -15,11 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-    private int product_id;
+    private Integer product_id;
     private String product_name;
-        private int surplus;
     private String introduction;
-    private int price;
     private String product_type;
     private String img_url;
 }

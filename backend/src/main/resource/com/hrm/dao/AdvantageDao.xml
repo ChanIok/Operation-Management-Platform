@@ -5,9 +5,19 @@
 
 <mapper namespace="com.hrm.dao.AdvantageDao">
 
-
     <select id="listAdvantagesByProductId" parameterType="int" resultType="Advantage">
         select * from advantage where product_id = #{product_id}
     </select>
 
+    <insert id="insertAdvantage" parameterType="Advantage">
+        insert into advantage values(#{product_id},#{title},#{content},#{img_url}) where  product_id = #{product_id}
+    </insert>
+
+    <delete id="deleteAdvantage" parameterType="Advantage" >
+        delete  from advantage  where  product_id = #{product_id} and title = #{title}
+    </delete>
+
+    <update id="updateAdvantage" parameterType="Advantage" >
+        update advantage set product_id = #{product_id},title= #{title}, content = #{content},img_url = #{img_url}  where  product_id = #{product_id}
+    </update>
 </mapper>

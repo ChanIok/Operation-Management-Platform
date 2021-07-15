@@ -11,4 +11,8 @@
         insert into transaction value (#{trade_tr_id},#{user_id},#{product_id},#{specification_id},
         #{product_name},#{transaction_time},#{number},#{authority_time})
     </insert>
+    
+    <select id="findTransactionById" parameterType="int" resultType="Transaction" >
+        select * from transaction where user_id = #{user_id};
+    </select>
 </mapper>
