@@ -194,20 +194,20 @@ public class CartController {
             res.data.put("message", "用户余额不足");
             return res;
         }
-        System.out.println("用户余额：  " + userMoney);
-        System.out.println("----------------------------3");
+        System.out.println("-------------用户余额：  " + userMoney);
+
         try {
             ArrayList<ShowShopping> shopping = cartService.entryCart(id);
-            ArrayList<ShowShopping> showShoppingArrayList = new ArrayList<>();
+
             for (int i = 0; i < shopping.size(); i++) {
                 ShowShopping showObj = shopping.get(i);
                 aliPay = aliPay + showObj.getBuy_count() * showObj.getPrice();
-                showShoppingArrayList.add(showObj);
             }
 
             if (aliPay > userMoney) {
                 res.code = 1;
-                res.data.put("message", "余额不足");
+                res.data.put("message", "用户余额不足");
+                return res;
             }
 
             ArrayList<Transaction> transactionArrayList = new ArrayList<Transaction>();
