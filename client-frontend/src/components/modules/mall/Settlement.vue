@@ -82,17 +82,9 @@ export default {
         });
     },
     doSettlement() {
-      _getSettlement()
-        .then((res) => {
-          if (res.code === 0) {
-            console.log(res.data.message);
-          } else {
-            console.log(res.data.message);
-          }
-        })
-        .catch((err) => {
-          console.log("结算失败！");
-        });
+      this.$router.push({
+        path: "/payment-result",
+      });
     },
   },
   mounted() {

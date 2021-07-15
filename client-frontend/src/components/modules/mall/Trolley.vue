@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { ElMessage } from "element-plus";
 import { _updateShoppingCart, _getShoppingCart } from "../../../api/mall/mall";
 import trolleyImg from "../../../assets/images/modules/mall/trolley.png";
 import store from "../../../store";
@@ -73,7 +74,7 @@ export default {
       producesName: "云服务器 ECS",
       sum: 0,
       money: 0,
-      totalMoney: 0,
+ 
       trolley: [
         {
           product_id: 1,
@@ -97,9 +98,6 @@ export default {
   props: ["productInCart"],
 
   methods: {
-    applyClick(val) {
-      this.isActive = val.currentTarget.id;
-    },
     addNum(item) {
       item.buy_count++;
       this.updateShoppingCart();
@@ -143,10 +141,17 @@ export default {
       localStorage.setItem("trolley", JSON.stringify(trolleyWrapper));
     },
     doSettlement() {
-      this.$router.push({
-        path: "/settlement",
-        query: { return: this.$route.path },
-      });
+      if (this.totalPrice !== 0) {
+        this.$router.push({
+          path: "/settlement",
+          query: { return: this.$route.path },
+        });
+      } else {
+        ElMessage.warning({
+          message: "你还没有选入任何商品",
+          type: "warning",
+        });
+      }
     },
     updateShoppingCart() {
       this.saveTrolley();
