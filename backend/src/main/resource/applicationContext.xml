@@ -47,15 +47,14 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/auth/**"/>
-
-            <mvc:exclude-mapping path="/mall/products/**"/>
+            <mvc:exclude-mapping path="/mall/**"/>
             <mvc:exclude-mapping path="/index.html"/>
             <bean class="com.hrm.interceptor.JWTInterceptors"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- 配置异常处理器-->
-    <bean id="sysExceptionResolver" class="com.hrm.handler.GlobalExceptionHandler"></bean>
+    <!--&lt;!&ndash; 配置异常处理器&ndash;&gt;
+    <bean id="sysExceptionResolver" class="com.hrm.handler.GlobalExceptionHandler"></bean>-->
 
     <!--导入dao-->
     <import resource="classpath:applicationContext-dao.xml" />

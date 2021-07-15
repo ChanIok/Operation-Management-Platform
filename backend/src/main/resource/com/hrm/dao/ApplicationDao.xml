@@ -9,4 +9,17 @@
         select * from application where product_id = #{product_id}
     </select>
 
+    <insert id="insertApplication" parameterType="Application">
+        insert into application values(#{product_id},#{title},#{content},#{img_url}) where  product_id = #{product_id}
+    </insert>
+
+    <delete id="deleteApplication" parameterType="Application" >
+        delete  from application  where  product_id = #{product_id} and title = #{title}
+    </delete>
+
+<!--    <update id="insertApplication" parameterType="Application" >-->
+<!--        update application set product_id = #{product_id},title= #{title}, content = #{content},img_url = #{img_url}  where  product_id = #{product_id}-->
+<!--    </update>-->
+
+
 </mapper>

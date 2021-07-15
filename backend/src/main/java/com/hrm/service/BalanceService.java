@@ -14,4 +14,10 @@ public interface BalanceService {
 
     //更新余额
     int updateMoneyById(Balance balance);
+
+    //检查用户是否有账号
+    int checkUser(int user_id);
+
+    //注册时初始化用户的金额
+    int addBalance(int user_id);
 }

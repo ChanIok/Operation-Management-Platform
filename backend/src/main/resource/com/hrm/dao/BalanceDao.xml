@@ -13,4 +13,11 @@
         update user_balance set user_balance = #{user_balance} where user_id = #{user_id}
     </update>
 
+    <select id="checkUser" resultType="int" >
+        select user_id from user_balance where user_id = #{user_id}
+    </select>
+
+    <insert id="addBalance" parameterType="int" >
+        insert into user_balance values (#{user_id},0)
+    </insert>
 </mapper>

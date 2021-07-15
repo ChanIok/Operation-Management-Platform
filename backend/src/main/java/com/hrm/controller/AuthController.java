@@ -7,6 +7,7 @@ import com.hrm.constant.MessageConstant;
 import com.hrm.entry.Response;
 import com.hrm.pojo.Login;
 import com.hrm.pojo.UserInfo;
+import com.hrm.service.BalanceService;
 import com.hrm.service.LoginService;
 import com.hrm.utils.JWTUtils;
 import com.hrm.utils.JsonUtils;
@@ -30,6 +31,9 @@ public class AuthController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private BalanceService balanceService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -128,6 +132,10 @@ public class AuthController {
             res.data.put("message", MessageConstant.REGISTER_FAILURE);
             return res;
         }
+
+        //初始化账户
+        int user_id = loginService.findIdbyName(username);
+        balanceService.addBalance(user_id);
 
         res.code = Constant.CODE_SUCCESS;
         res.data.put("message", MessageConstant.REGISTER_SUCCESS);

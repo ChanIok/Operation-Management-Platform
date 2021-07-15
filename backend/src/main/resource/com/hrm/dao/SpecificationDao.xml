@@ -9,4 +9,17 @@
         select * from specification where product_id = #{product_id}
     </select>
 
+
+    <insert id="insertSpecification" parameterType="Specification">
+        insert into specification values(#{product_id},#{specification_id},#{specification_name},#{price},#{description}) where  product_id = #{product_id}
+    </insert>
+
+    <delete id="deleteSpecification" parameterType="Specification" >
+        delete  from specification  where  product_id = #{product_id} and specification_id = #{specification_id}
+    </delete>
+
+    <update id="updateSpecification" parameterType="Specification" >
+        update product set specification_name = #{specification_name},price = #{price}, description = #{description}  where  product_id = #{product_id} and specification_id = #{specification_id}
+    </update>
+
 </mapper>

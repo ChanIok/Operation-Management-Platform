@@ -36,7 +36,7 @@ public class MallController {
 
         for (String item : types) {
             HashMap<String, Object> productsInType = new HashMap<>();
-            productsInType.put("product_type", item);
+            productsInType.put("type", item);
             productsInType.put("list", mallService.listProductsByType(item));
             products.add(productsInType);
         }
@@ -64,6 +64,4 @@ public class MallController {
         res.data.put("message", "已返回产品详情");
         return res;
     }
-
-
 }
