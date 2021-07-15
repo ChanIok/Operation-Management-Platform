@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { _updateShoppingCart, _getShoppingCart } from "../../../api/mall/mall";
 import trolleyImg from "../../../assets/images/modules/mall/trolley.png";
 import store from "../../../store";
 export default {
@@ -101,14 +102,14 @@ export default {
     },
     addNum(item) {
       item.buy_count++;
-      this.saveTrolley();
+      this.updateShoppingCart();
     },
     subNum(item, index) {
       item.buy_count--;
       if (item.buy_count <= 0) {
         this.trolley.splice(index, 1);
       }
-      this.saveTrolley();
+      this.updateShoppingCart();
     },
     setTrolleySize(width) {
       if (width < 480) {
@@ -122,6 +123,18 @@ export default {
       if (temp !== null) {
         this.trolley = temp.trolley;
       }
+      _getShoppingCart()
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res.data.message);
+            this.trolley = res.data.trolley;
+          } else {
+            console.log(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log("获取购物车失败！");
+        });
     },
     saveTrolley() {
       let trolleyWrapper = {
@@ -134,6 +147,24 @@ export default {
         path: "/settlement",
         query: { return: this.$route.path },
       });
+    },
+    updateShoppingCart() {
+      this.saveTrolley();
+      let trolleyDto = {
+        trolley: this.trolley,
+      };
+      _updateShoppingCart(trolleyDto)
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res.data.message);
+            this.details = res.data.details;
+          } else {
+            console.log(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log("更新购物车失败！");
+        });
     },
   },
   computed: {
@@ -163,7 +194,8 @@ export default {
         ) {
           item.buy_count++;
           this.isTrolleyShow = true;
-          this.saveTrolley();
+          this.updateShoppingCart();
+
           return;
         }
       }
@@ -177,7 +209,7 @@ export default {
       };
       this.trolley.push(item);
       this.isTrolleyShow = true;
-      this.saveTrolley();
+      this.updateShoppingCart();
     },
   },
 };

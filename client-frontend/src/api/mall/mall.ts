@@ -15,10 +15,14 @@ interface IProductsInType {
 
 // 购物车单项商品详情
 interface IProductInTrolley {
- 
   product_id: number;
   specification_id: number;
   buy_count: number;
+}
+
+// 购物车
+interface ITrolley {
+  trolley: IProductInTrolley[];
 }
 
 //  获取所有产品
@@ -32,7 +36,7 @@ export async function _getProductDetails(id: string) {
 }
 
 // 更新购物车
-export async function _updateShoppingCart(torlleyDto: IProductInTrolley[]) {
+export async function _updateShoppingCart(torlleyDto: ITrolley) {
   return api({ method: 'POST', url: '/mall/cart', data: torlleyDto });
 }
 

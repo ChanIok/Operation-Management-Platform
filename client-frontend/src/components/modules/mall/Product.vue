@@ -220,10 +220,10 @@ export default {
       _getProductDetails(this.$route.params.id)
         .then((res) => {
           if (res.code === 0) {
-            console.log("获取产品详情成功！");
+            console.log(res.data.message);
             this.details = res.data.details;
           } else {
-            ElMessage.error("获取产品详情失败！");
+            ElMessage.error(res.data.message);
           }
         })
         .catch((err) => {

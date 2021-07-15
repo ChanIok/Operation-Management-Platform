@@ -32,14 +32,11 @@ public class UserController {
 
 //      读取token的id
         int user_id = JWTUtils.getUserId(token);
-
         Object userInfo = userService.findUserInfoById(user_id);
-
 
         res.code = Constant.CODE_SUCCESS;
         res.data.put("userInfo", userInfo);
         res.data.put("message", "已返回用户信息");
-
         return res;
     }
 }

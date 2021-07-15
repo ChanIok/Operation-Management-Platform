@@ -12,8 +12,8 @@ public class ShowShopping {
 
     private int product_id;
     private int specification_id;
-    private String produce_name;
-    private String specifications_name;
+    private String product_name;
+    private String specification_name;
     private int buy_count;
     private int price;
 

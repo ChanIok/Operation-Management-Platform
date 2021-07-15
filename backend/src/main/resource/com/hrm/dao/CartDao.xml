@@ -5,8 +5,12 @@
 
 <mapper namespace="com.hrm.dao.CartDao">
 
-    <select id="checkCart" parameterType="Cart"  resultType="Cart">
-        select user_id,product_id,buy_count,specification_id from shopping_cart where user_id = #{user_id} and product_id = #{product_id} and specification_id = #{specification_id}
+    <select id="checkCart" parameterType="Cart" resultType="Cart">
+        select user_id, product_id, buy_count, specification_id
+        from shopping_cart
+        where user_id = #{user_id}
+          and product_id = #{product_id}
+          and specification_id = #{specification_id}
     </select>
 
     <insert id="insertCart" parameterType="Cart">
@@ -17,23 +21,50 @@
         insert into shopping_cart values(#{user_id},#{product_id},#{buy_count},#{specification_id})
     </insert>
 
-    <delete id="purchase" parameterType="Cart" >
-        delete  from shopping_cart where user_id = #{user_id} and product_id = #{product_id}
+    <delete id="purchase" parameterType="Cart">
+        delete
+        from shopping_cart
+        where user_id = #{user_id}
+          and product_id = #{product_id}
     </delete>
 
 
-    <update id="updateProduct" parameterType="Cart" >
-        update shopping_cart set buy_count = #{buy_count} where user_id = #{user_id} and product_id = #{product_id} and specification_id = #{specification_id}
+    <update id="updateProduct" parameterType="Cart">
+        update shopping_cart
+        set buy_count = #{buy_count}
+        where user_id = #{user_id}
+          and product_id = #{product_id}
+          and specification_id = #{specification_id}
     </update>
 
     <delete id="deleteProduct" parameterType="Cart">
-        delete from shopping_cart where user_id = #{user_id} and product_id = #{product_id} and specification_id = #{specification_id}
+        delete
+        from shopping_cart
+        where user_id = #{user_id}
+          and product_id = #{product_id}
+          and specification_id = #{specification_id}
     </delete>
 
-    <select id="entryCart" parameterType="ID" resultType="ShowShopping" >
-        select a.product_id as product_id, c.specification_id as specification_id, b.product_name as produce_name, c.name as specifications_name, a.buy_count , c.price as price
-        from shopping_cart as a, product as b, specification as c
-        where a.user_id = #{user_id}  and a.product_id = b.product_id and  b.product_id = c.product_id and a.specification_id = c.specification_id
+    <delete id="deleteProductsByUserId" parameterType="int">
+        delete
+        from shopping_cart
+        where user_id = #{user_id}
+    </delete>
+
+    <select id="entryCart" parameterType="ID" resultType="ShowShopping">
+        select a.product_id       as product_id,
+               c.specification_id as specification_id,
+               b.product_name     as product_name,
+               c.name             as specification_name,
+               a.buy_count,
+               c.price            as price
+        from shopping_cart as a,
+             product as b,
+             specification as c
+        where a.user_id = #{user_id}
+          and a.product_id = b.product_id
+          and b.product_id = c.product_id
+          and a.specification_id = c.specification_id
     </select>
 
 </mapper>

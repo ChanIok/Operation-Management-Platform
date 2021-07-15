@@ -51,8 +51,8 @@ export default {
         let currentPath = this.$route.path;
         console.log(currentPath);
         this.$router.push({
-         path: "/login",
-         query: { return: currentPath },
+          path: "/login",
+          query: { return: currentPath },
         });
       } else {
         this.isExitWrapper = !this.isExitWrapper;
@@ -73,7 +73,7 @@ export default {
       }
     },
     exitLogin() {
-      localStorage.removeItem("token");
+      localStorage.clear();
       this.isExitWrapper = false;
       this.$router.go(0);
     },

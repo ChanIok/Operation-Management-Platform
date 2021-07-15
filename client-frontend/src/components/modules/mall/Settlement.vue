@@ -17,15 +17,13 @@
         :row-style="{ height: '80px' }"
       >
         <el-table-column type="index" :index="indexMethod"> </el-table-column>
-        <el-table-column prop="produce_name" label="产品名称">
+        <el-table-column prop="product_name" label="产品名称">
         </el-table-column>
         <el-table-column prop="specification_name" label="规格">
         </el-table-column>
-        <el-table-column prop="price" label="单价" >
-        </el-table-column>
-        <el-table-column prop="num" label="数量"> </el-table-column>
-        <el-table-column prop="total_price" label="总价">
-        </el-table-column>
+        <el-table-column prop="price" label="单价"> </el-table-column>
+        <el-table-column prop="buy_count" label="数量"> </el-table-column>
+        <el-table-column prop="total_price" label="总价"> </el-table-column>
       </el-table>
     </div>
     <div id="footer">
@@ -34,56 +32,28 @@
         <span class="price">￥ {{ priceSum }} </span>
       </div>
       <div id="pay-wrapper">
-        <el-button type="primary" id="pay-button">确认支付</el-button>
+        <el-button type="primary" id="pay-button" @click="doSettlement"
+          >确认支付</el-button
+        >
       </div>
     </div>
   </div>
   <router-view />
 </template>
 <script>
+import { _getSettlement, _getShoppingCart } from "../../../api/mall/mall";
 export default {
   data() {
     return {
       tableData: [
         {
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
+          product_name: "",
+          specification_name: "",
+          price: 0,
+          buy_count: 0,
+          total_price: 0,
         },
-        {
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
-        },
-        {
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
-        },
-        {
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t5",
-          price: 200,
-          num: 2,
-          total_price: 400,
-        },
-        {
-          produce_name: "云服务器ECS",
-          specification_name: "共享型实例s6",
-          price: 500,
-          num: 1,
-          total_price: 500,
-        },
-   
       ],
-      count: 7,
-      priceSum: 2300,
     };
   },
   methods: {
@@ -93,6 +63,52 @@ export default {
     },
     indexMethod(index) {
       return index + 1;
+    },
+    getTrolley() {
+      _getShoppingCart()
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res.data.message);
+            this.tableData = res.data.trolley;
+            for (let item of this.tableData) {
+              item.total_price = item.price * item.buy_count;
+            }
+          } else {
+            console.log(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log("获取购物车失败！");
+        });
+    },
+    doSettlement() {
+      _getSettlement()
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res.data.message);
+          } else {
+            console.log(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log("结算失败！");
+        });
+    },
+  },
+  mounted() {
+    this.getTrolley();
+  },
+  computed: {
+    count() {
+      return this.tableData.length;
+    },
+
+    priceSum() {
+      let sum = 0;
+      for (let item of this.tableData) {
+        sum += item.total_price;
+      }
+      return sum;
     },
   },
 };
@@ -116,15 +132,15 @@ export default {
   #container {
     background-color: rgb(250, 250, 250);
     margin: 0 auto;
-   padding: 0 10% 0 10%;
+    padding: 0 10% 0 10%;
     height: calc(100% - 80px);
     overflow: auto;
-    
+
     @media screen and (max-width: 1080px) {
       width: 100%;
-      padding:  0;
+      padding: 0;
     }
-    .el-table{
+    .el-table {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.03);
     }
   }

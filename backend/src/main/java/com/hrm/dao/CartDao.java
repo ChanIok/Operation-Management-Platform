@@ -37,6 +37,9 @@ public interface CartDao {
     //删除商品
     int deleteProduct(Cart cart);
 
+    //根据用户ID删除所有商品
+    int deleteProductsByUserId(int user_id);
+
     //向前端提供用户购物车情况
     ArrayList<ShowShopping> entryCart(ID id);
 

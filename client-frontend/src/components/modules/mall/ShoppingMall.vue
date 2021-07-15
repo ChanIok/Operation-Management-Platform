@@ -92,17 +92,17 @@ export default {
       _getProducts()
         .then((res) => {
           if (res.code === 0) {
-            console.log("获取所有产品成功！");
+            console.log(res.data.message);
             this.products = res.data.products;
             this.$nextTick(() => {
               this.goAnchor(this.$route.params.id);
             });
           } else {
-            ElMessage.error("获取所有产品失败！");
+            ElMessage.error(res.data.message);
           }
         })
         .catch((err) => {
-          ElMessage.error("获取所有产品失败！");
+          ElMessage.error("获取产品列表失败！");
         });
     },
   },
