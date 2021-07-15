@@ -68,6 +68,12 @@ public class CartServiceImpl implements CartService {
         return cartDao.deleteProduct(cart);
     }
 
+
+    @Override
+    public int deleteProductsByUserId(int user_id) {
+        return cartDao.deleteProductsByUserId(user_id);
+    }
+
     @Override
     public ArrayList<ShowShopping> entryCart(ID id) {
         return cartDao.entryCart(id);

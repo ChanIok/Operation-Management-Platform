@@ -49,7 +49,7 @@
               <el-card class="box-card" shadow="hover">
                 <template #header>
                   <div class="card-header">
-                    <span>{{ item.name }}</span>
+                    <span>{{ item.specification_name }}</span>
                   </div>
                 </template>
                 <div class="card-content">
@@ -170,7 +170,7 @@ export default {
       details: {
         specification: [
           {
-            name: "",
+            specification_name: "",
             specification_id: "",
             description: "",
             price: "",
