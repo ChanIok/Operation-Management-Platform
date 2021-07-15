@@ -36,7 +36,7 @@ public class MallController {
 
         for (String item : types) {
             HashMap<String, Object> productsInType = new HashMap<>();
-            productsInType.put("type", item);
+            productsInType.put("product_type", item);
             productsInType.put("list", mallService.listProductsByType(item));
             products.add(productsInType);
         }

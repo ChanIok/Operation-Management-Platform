@@ -119,6 +119,7 @@ export default {
               console.log("save token!");
               ElMessage.success({
                 message: "登陆成功！",
+                offset: 60,
                 type: "success",
               });
               this.$router.push(this.$route.query.return);

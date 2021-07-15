@@ -9,7 +9,7 @@ interface IProduct {
 
 //  单类产品
 interface IProductsInType {
-  type: string;
+  product_type: string;
   list: IProduct[];
 }
 

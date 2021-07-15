@@ -25,5 +25,10 @@
           and user.user_id = user_info.user_id
     </select>
 
+    <update id="updateUserInfo" parameterType="map">
+        UPDATE user_info SET phone_num = #{phone_num},  email = #{email}
+        where user_id = #{user_id}
+
+    </update>
 
 </mapper>

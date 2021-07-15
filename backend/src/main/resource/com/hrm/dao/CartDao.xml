@@ -55,7 +55,7 @@
         select a.product_id       as product_id,
                c.specification_id as specification_id,
                b.product_name     as product_name,
-               c.name             as specification_name,
+               c.specification_name    as specification_name,
                a.buy_count,
                c.price            as price
         from shopping_cart as a,

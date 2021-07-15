@@ -169,6 +169,7 @@ export default {
               if (res.code === 0) {
                 ElMessage.success({
                   message: "恭喜你，注册成功",
+                  offset: 60,
                   type: "success",
                 });
                 store.commit("setEvent", "login");

@@ -199,8 +199,7 @@ public class CartController {
         try {
             ArrayList<ShowShopping> shopping = cartService.entryCart(id);
 
-            for (int i = 0; i < shopping.size(); i++) {
-                ShowShopping showObj = shopping.get(i);
+            for (ShowShopping showObj : shopping) {
                 aliPay = aliPay + showObj.getBuy_count() * showObj.getPrice();
             }
 

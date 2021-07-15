@@ -10,7 +10,7 @@
     </select>
 
     <select id="listProductsByType" parameterType="string" resultType="Product">
-        select * from product where type = #{type}
+        select * from product where product_type = #{product_type}
     </select>
 
 

@@ -18,8 +18,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Object findUserInfoById(int user_id) {
+
         return userDao.findUserInfoById(user_id);
     }
 
-
+@Override
+public int updateUserInfo(Object userInfo){
+    return userDao.updateUserInfo(userInfo);
+}
 }

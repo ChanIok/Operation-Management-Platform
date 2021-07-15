@@ -74,24 +74,9 @@ export default {
       producesName: "云服务器 ECS",
       sum: 0,
       money: 0,
- 
+
       trolley: [
-        {
-          product_id: 1,
-          specification_id: 7,
-          product_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          buy_count: 1,
-          price: 998,
-        },
-        {
-          product_id: 1,
-          specification_id: 2,
-          product_name: "云服务器ECS",
-          specification_name: "突发性能实例 s6",
-          buy_count: 3,
-          price: 1088,
-        },
+
       ],
     };
   },
@@ -192,6 +177,13 @@ export default {
       this.setTrolleySize(width);
     },
     productInCart(val) {
+      if (localStorage.getItem("token") === null) {
+        this.$router.push({
+          path: "/login",
+          query: { return: this.$route.path },
+        });
+        return;
+      }
       for (let item of this.trolley) {
         if (
           item.product_id === val.product_id &&

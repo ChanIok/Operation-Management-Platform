@@ -65,6 +65,13 @@ export default {
       return index + 1;
     },
     getTrolley() {
+      if (localStorage.getItem("token") === null) {
+        this.$router.push({
+          path: "/login",
+          query: { return: this.$route.path },
+        });
+        return;
+      }
       _getShoppingCart()
         .then((res) => {
           if (res.code === 0) {

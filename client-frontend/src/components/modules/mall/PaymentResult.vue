@@ -74,7 +74,7 @@ export default {
           }
         })
         .catch((err) => {
-           this.result = false;
+          this.result = false;
           console.log("结算失败！");
         })
         .finally(() => {
@@ -86,6 +86,13 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push({
+        path: "/login",
+        query: { return: this.$route.path },
+      });
+      return;
+    }
     this.openFullScreen();
   },
   computed: {},
@@ -98,10 +105,10 @@ export default {
 </style>
 <style  lang="scss" scoped>
 #result-wrapper {
-   height: 100%;
-   display: flex;
-   align-items: center;
-   justify-content:center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
  

@@ -44,7 +44,7 @@
           :key="index"
         >
           <div class="anchor" :id="`item${index + 1}`"></div>
-          <div class="title-type">{{ item.type }}</div>
+          <div class="title-type">{{ item.product_type }}</div>
           <div
             class="product-list-item"
             v-for="(pItem, pIndex) in item.list"
@@ -98,11 +98,19 @@ export default {
               this.goAnchor(this.$route.params.id);
             });
           } else {
-            ElMessage.error(res.data.message);
+            ElMessage.error({
+              offset: 60,
+              message: res.data.message,
+              type: "error",
+            });
           }
         })
         .catch((err) => {
-          ElMessage.error("获取产品列表失败！");
+          ElMessage.error({
+            offset: 60,
+            message: "获取产品列表失败！",
+            type: "error",
+          });
         });
     },
   },
