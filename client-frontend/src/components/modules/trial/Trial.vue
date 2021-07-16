@@ -14,7 +14,7 @@
           <span>{{ tableData.specification_name }}</span>
         </el-descriptions-item>
         <el-descriptions-item label="价格">
-          <span>{{ tableData.price }}</span>
+          <span>{{ tableData.price }}元</span>
         </el-descriptions-item>
       </el-descriptions>
       <template #footer>
@@ -75,7 +75,7 @@
                   {{ item.description }}
                   <el-divider style="margin: 15px 0 15px 0"></el-divider>
                   <div class="price">
-                    <span>￥{{ item.price }}</span> / 年
+                    <span>￥{{ item.price }}</span> / 月
                   </div>
                   <div class="card-button-wrapper">
                     <el-button type="primary" @click="receiveTrial(item)"
@@ -180,7 +180,7 @@
 
 <script>
 import store from "../../../store";
-import { _getProductDetails } from "../../../api/mall/mall";
+import { _getProductDetails } from "../../../api/trial/trial";
 export default {
   data() {
     return {

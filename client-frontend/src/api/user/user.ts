@@ -24,6 +24,11 @@ export async function _getUserBalance() {
 }
 
 // 更新用户信息
-export async function _updateUserInfo(userInfoDto:IUserInfo) {
-  return api({ method: 'POST', url: '/user/info' ,data:userInfoDto});
+export async function _updateUserInfo(userInfoDto: IUserInfo) {
+  return api({ method: 'POST', url: '/user/info', data: userInfoDto });
+}
+
+// 获取用户所有产品
+export async function _getUserProducts() {
+  return api({ method: 'GET', url: '/user/products' });
 }

@@ -10,7 +10,7 @@
             <i class="el-icon-user-solid"></i>
             <div class="menu-item-descript">我的帐户</div>
           </div>
-          <div class="menu-item" @click="goAnchor('products')">
+          <div class="menu-item" @click="goAnchor('purchase')">
             <i class="el-icon-s-goods"></i>
             <div class="menu-item-descript">我的产品</div>
           </div>
@@ -50,17 +50,21 @@
           </div>
         </div>
 
-        <div class="list-item card-show" id="products-wrapper">
-          <div class="anchor" id="products"></div>
+        <div class="list-item card-show" id="purchase-wrapper">
+          <div class="anchor" id="purchase"></div>
           <div class="item-header">
             <div class="title">我的产品</div>
           </div>
           <el-divider></el-divider>
-
+          <el-empty
+            description="你还没有拥有任何产品"
+            :image-size="64"
+            v-if="purchase.length === 0"
+          ></el-empty>
           <div class="product-list-wrapper">
             <div
               class="product-list-item"
-              v-for="(pItem, pIndex) in products"
+              v-for="(pItem, pIndex) in purchase"
               :key="pIndex"
             >
               <el-card class="box-card" shadow="hover">
@@ -70,7 +74,9 @@
                   </div>
                 </template>
                 <div class="card-content">
-                  <div class="content-descript">{{ pItem.description }}</div>
+                  <div class="content-descript">
+                    {{ pItem.specification_name }}
+                  </div>
                   <div class="content-time">
                     <span>到期时间：</span>{{ pItem.authority_time }}
                   </div>
@@ -85,11 +91,15 @@
             <div class="title">我的体验</div>
           </div>
           <el-divider></el-divider>
-
+          <el-empty
+            description="你还没有拥有任何产品"
+            :image-size="64"
+            v-if="trial.length === 0"
+          ></el-empty>
           <div class="product-list-wrapper">
             <div
               class="product-list-item"
-              v-for="(eItem, eIndex) in products"
+              v-for="(eItem, eIndex) in trial"
               :key="eIndex"
             >
               <el-card class="box-card" shadow="hover">
@@ -99,7 +109,9 @@
                   </div>
                 </template>
                 <div class="card-content">
-                  <div class="content-descript">{{ eItem.description }}</div>
+                  <div class="content-descript">
+                    {{ eItem.specification_name }}
+                  </div>
                   <div class="content-time">
                     <span>到期时间：</span>{{ eItem.authority_time }}
                   </div>
@@ -178,6 +190,7 @@ import {
   _getUserInfo,
   _updateUserInfo,
   _getUserBalance,
+  _getUserProducts,
 } from "../../../api/user/user";
 import alipay from "../../../assets/images/modules/top-up/alipay.jpg";
 
@@ -220,38 +233,8 @@ export default {
         email: "",
         phone_num: "",
       },
-      products: [
-        {
-          product_name: "云服务器ECS",
-          description: "突发性能实例 t6",
-          authority_time: "2022-07-30",
-        },
-        {
-          product_name: "轻量应用服务器",
-          description: "轻量应用服务器 2核1G",
-          authority_time: "2022-02-10",
-        },
-        {
-          product_name: "弹性裸金属服务器",
-          description: "AMD 通用型弹性裸金属服务器 ebmg6a",
-          authority_time: "2023-01-09",
-        },
-        {
-          product_name: "云服务器ECS",
-          description: "突发性能实例 t6",
-          authority_time: "2023-01-31",
-        },
-        {
-          product_name: "云安全中心",
-          description: "高级版",
-          authority_time: "2027-11-29",
-        },
-        {
-          product_name: "云原生关系型数据库PolarDB",
-          description: "PolarDB MySQL版",
-          authority_time: "2021-09-09",
-        },
-      ],
+      purchase: [],
+      trial: [],
       rules: {
         phone_num: [{ validator: validatePhone, trigger: "blur" }],
         email: [{ validator: validateEmail, trigger: "blur" }],
@@ -268,7 +251,6 @@ export default {
             email: this.info.email,
             phone_num: this.info.phone_num,
           };
-
           _updateUserInfo(userInfoDto)
             .then((res) => {
               if (res.code === 0) {
@@ -302,6 +284,7 @@ export default {
       let anchor = document.getElementById(index);
       if (anchor !== null) anchor.scrollIntoView();
     },
+    // 获取用户信息
     getUserInfo() {
       if (localStorage.getItem("token") === null) {
         this.$router.push({
@@ -310,6 +293,7 @@ export default {
         });
         return;
       }
+      // 获取用户基本信息
       _getUserInfo()
         .then((res) => {
           if (res.code === 0) {
@@ -320,10 +304,31 @@ export default {
           }
         })
         .then(() => {
+          // 获取余额
           _getUserBalance().then((res) => {
+      
             if (res.code === 0) {
               console.log(res.data.message);
               this.balance = res.data.balance;
+            } else {
+              throw err;
+            }
+          });
+        })
+        .then(() => {
+          // 获取用户产品
+          _getUserProducts().then((res) => {
+            if (res.code === 0) {
+              console.log(res.data.message);
+              for (let item of res.data.products) {
+                item.authority_time = item.authority_time.slice(0, 10);
+                if (item.specification_type === "purchase") {
+                  this.purchase.push(item);
+                } else {
+                  this.trial.push(item);
+                }
+              }
+         
             } else {
               throw err;
             }
@@ -358,6 +363,7 @@ export default {
   },
   mounted() {
     this.getUserInfo();
+      this.setDialogSize(window.innerWidth);
   },
   computed: {
     getWidth() {

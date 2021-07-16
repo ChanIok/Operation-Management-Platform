@@ -41,8 +41,8 @@
 </template>
 <script>
 import { ElMessage } from "element-plus";
-import { _getTrials } from "../../../api/mall/mall";
-import banner from "../../../assets/images/modules/mall/banner.jpg";
+import { _getTrials } from "../../../api/trial/trial";
+import banner from "../../../assets/images/modules/mall/banner1.jpg";
 export default {
   data() {
     return {
