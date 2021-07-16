@@ -1,6 +1,29 @@
 <template>
   <div id="product-wrapper" style="width: 100%; height: 800px">
-    <trolley :productInCart="productInCart"></trolley>
+    <el-dialog
+      title="领取确认"
+      v-model="dialogTableVisible"
+      :width="dialogWidth"
+      :fullscreen="dialogFull"
+    >
+      <el-descriptions title="" :column="1" border>
+        <el-descriptions-item label="产品名称">
+          <span>{{ tableData.product_name }}</span>
+        </el-descriptions-item>
+        <el-descriptions-item label="配置名称">
+          <span>{{ tableData.specification_name }}</span>
+        </el-descriptions-item>
+        <el-descriptions-item label="价格">
+          <span>{{ tableData.price }}</span>
+        </el-descriptions-item>
+      </el-descriptions>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogTableVisible = false">取 消</el-button>
+          <el-button type="primary" @click="confirm">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
 
     <div
       id="banner"
@@ -9,11 +32,7 @@
       <div id="content">
         <div id="title">{{ details.info.product_name }}</div>
         <div id="second-title">{{ details.info.introduction }}</div>
-        <div id="banner-button">
-          <button class="button" @click="goAnchor('#par')">
-            <span>立即购买</span>
-          </button>
-        </div>
+        <div id="banner-button"></div>
       </div>
     </div>
 
@@ -59,8 +78,8 @@
                     <span>￥{{ item.price }}</span> / 年
                   </div>
                   <div class="card-button-wrapper">
-                    <el-button type="primary" @click="addToCart(item)"
-                      >加入购物车</el-button
+                    <el-button type="primary" @click="receiveTrial(item)"
+                      >立即领取</el-button
                     >
                   </div>
                 </div>
@@ -160,11 +179,21 @@
 </template>
 
 <script>
-import trolley from "./Trolley.vue";
+import store from "../../../store";
 import { _getProductDetails } from "../../../api/mall/mall";
 export default {
   data() {
     return {
+      dialogWidth: "60%",
+      dialogFull: false,
+      dialogTableVisible: false,
+      tableData: {
+        product_id: "",
+        specification_id: "",
+        product_name: "",
+        specification_name: "",
+        price: 0,
+      },
       productInCart: {},
       details: {
         specification: [
@@ -201,9 +230,7 @@ export default {
       price: 469.2,
     };
   },
-  components: {
-    trolley,
-  },
+  components: {},
   methods: {
     clickApplicationMenu(val) {
       this.applicationIndex = val;
@@ -229,15 +256,27 @@ export default {
           ElMessage.error("获取产品详情失败！");
         });
     },
-    addToCart(item) {
-      this.productInCart = {
+    confirm() {
+      this.dialogTableVisible = false;
+    },
+    receiveTrial(item) {
+      this.tableData = {
         product_id: this.$route.params.id,
         specification_id: item.specification_id,
         product_name: this.details.info.product_name,
         specification_name: item.specification_name,
-        add_number: 1,
         price: item.price,
       };
+      this.dialogTableVisible = true;
+    },
+    setDialogSize(width) {
+      if (width < 720) {
+        this.labelPosition = "top";
+        this.dialogFull = true;
+      } else {
+        this.labelPosition = "right";
+        this.dialogFull = false;
+      }
     },
   },
   mounted() {
@@ -247,6 +286,14 @@ export default {
   computed: {
     applicationInfo() {
       return this.details.application[this.applicationIndex];
+    },
+    getWidth() {
+      return store.state.width;
+    },
+  },
+  watch: {
+    getWidth(width) {
+      this.setDialogSize(width);
     },
   },
 };

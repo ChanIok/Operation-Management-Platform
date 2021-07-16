@@ -6,6 +6,9 @@ import Presentation from '../components/modules/presentation/Presentation.vue';
 import ShoppingMall from '../components/modules/mall/ShoppingMall.vue';
 import Product from '../components/modules/mall/Product.vue';
 import Settlement from '../components/modules/mall/Settlement.vue';
+import ProductTrial from '../components/modules/trial/ExperienceCenter.vue';
+import Trial from '../components/modules/trial/Trial.vue';
+
 import PaymentResult from '../components/modules/mall/PaymentResult.vue';
 import PersonalCenter from '../components/modules/user/PersonalCenter.vue';
 import Supports from '../components/modules/supports/Supports.vue';
@@ -17,10 +20,6 @@ const routes = [
     component: index,
     children: [
       {
-        path: 'personal-data',
-        component: PersonalData,
-      },
-      {
         path: 'presentation',
         component: Presentation,
       },
@@ -29,9 +28,18 @@ const routes = [
         component: ShoppingMall,
       },
       {
-        path: 'product/:id?',
+        path: 'trial',
+        component: ProductTrial,
+      },
+      {
+        path: 'trial/:id',
+        component: Trial,
+      },
+      {
+        path: 'product/:id',
         component: Product,
       },
+
       {
         path: 'settlement',
         component: Settlement,

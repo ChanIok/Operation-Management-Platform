@@ -48,7 +48,7 @@ export default {
       mapper: {
         1: "/presentation",
         2: "/mall",
-        3: "/personal-data",
+        3: "/trial",
         4: "user",
         5: "/supports",
       },

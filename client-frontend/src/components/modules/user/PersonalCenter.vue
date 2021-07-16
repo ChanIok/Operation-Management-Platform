@@ -273,18 +273,25 @@ export default {
             .then((res) => {
               if (res.code === 0) {
                 ElMessage.success({
-                  offset:60,
+                  offset: 60,
                   message: res.data.message,
                   type: "success",
                 });
                 this.infoEdit = false;
               } else {
-                ElMessage.error("更新个人信息失败！");
+                ElMessage.error({
+                  offset: 60,
+                  message: res.data.message,
+                  type: "error",
+                });
               }
             })
-
             .catch((err) => {
-              ElMessage.error("更新个人信息失败！");
+              ElMessage.error({
+                offset: 60,
+                message: "更新个人信息失败！",
+                type: "error",
+              });
             });
         } else {
           console.log("error submit!!");
@@ -323,7 +330,11 @@ export default {
           });
         })
         .catch((err) => {
-          ElMessage.error("获取个人信息失败！");
+          ElMessage.error({
+            offset: 60,
+            message: "获取个人信息失败！",
+            type: "error",
+          });
         });
     },
 
