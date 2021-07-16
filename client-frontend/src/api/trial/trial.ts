@@ -9,3 +9,10 @@ export async function _getTrials() {
 export async function _getProductDetails(id: string) {
   return api({ method: 'GET', url: `/trial/products/${id}` });
 }
+
+
+// 领取体验产品
+export async function _getProductSettlement(productId: string,specificationId:string) {
+  return api({ method: 'GET', url: `/trial/products/${productId}/${specificationId}/settlement` });
+}
+

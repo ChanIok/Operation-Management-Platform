@@ -41,7 +41,7 @@ public class CartController {
     private TransactionService transactionService;
 
     @Autowired
-    private TradetrService tradetrService;
+    private TradeTRService tradetrService;
 
     @Autowired
     private AuthorityService authorityService;
@@ -231,7 +231,7 @@ public class CartController {
             }
 
             ArrayList<Transaction> transactionArrayList = new ArrayList<Transaction>();
-            ArrayList<Tradeex> tradeexArrayList = new ArrayList<>();
+            ArrayList<TradeTR> tradeTRArrayList = new ArrayList<>();
             ArrayList<Authority> authorityArrayList = new ArrayList<>();
 
             for (int i = 0; i < shopping.size(); i++) {
@@ -254,9 +254,9 @@ public class CartController {
 
                 try {
                     //创建用户交易流水信息
-                    tradeexArrayList.add(new Tradeex(null, product_id, user_id, specification_id, product_name, price, currentDatetime, buy_count));
+                    tradeTRArrayList.add(new TradeTR(null, product_id, user_id, specification_id, product_name, price, currentDatetime, buy_count));
 
-                    System.out.println("管理端交易流水信息" + tradeexArrayList.get(i).toString());
+                    System.out.println("管理端交易流水信息" + tradeTRArrayList.get(i).toString());
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -267,7 +267,7 @@ public class CartController {
 
                 try {
                     //插入交易流水信息信息
-                    tradetrService.insertTrade(tradeexArrayList.get(i));
+                    tradetrService.insertTrade(tradeTRArrayList.get(i));
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -279,7 +279,7 @@ public class CartController {
 
                 //创建用户交易信息
                 try {
-                    transactionArrayList.add(new Transaction(tradeexArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, currentDatetime, buy_count, currentDatetime));
+                    transactionArrayList.add(new Transaction(tradeTRArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, currentDatetime, buy_count, currentDatetime));
 
                     System.out.println("客户端交易流水信息" + transactionArrayList.get(i).toString());
                 } catch (Exception e) {

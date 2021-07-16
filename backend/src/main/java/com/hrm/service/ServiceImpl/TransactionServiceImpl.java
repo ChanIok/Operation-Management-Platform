@@ -1,7 +1,6 @@
 package com.hrm.service.ServiceImpl;
 
 import com.hrm.dao.TransactionDao;
-import com.hrm.pojo.Tradeex;
 import com.hrm.pojo.Transaction;
 import com.hrm.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.hrm.dao;
 
 import com.hrm.pojo.Authority;
-import com.hrm.pojo.Tradeex;
 
 /**
  * @author zjw

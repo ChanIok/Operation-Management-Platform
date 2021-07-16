@@ -1,6 +1,5 @@
 package com.hrm.dao;
 
-import com.hrm.pojo.Tradeex;
 import com.hrm.pojo.Transaction;
 
 import java.util.ArrayList;

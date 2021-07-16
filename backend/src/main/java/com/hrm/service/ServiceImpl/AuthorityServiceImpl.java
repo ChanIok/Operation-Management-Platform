@@ -2,7 +2,6 @@ package com.hrm.service.ServiceImpl;
 
 import com.hrm.dao.AuthorityDao;
 import com.hrm.pojo.Authority;
-import com.hrm.pojo.Tradeex;
 import com.hrm.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

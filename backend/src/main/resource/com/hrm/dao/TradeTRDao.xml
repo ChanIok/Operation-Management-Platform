@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hrm.dao.TradetrDao">
-    <insert id="insertTrade" parameterType="Tradeex" >
+<mapper namespace="com.hrm.dao.TradeTRDao">
+    <insert id="insertTrade" parameterType="TradeTR" >
         <selectKey order="AFTER" keyProperty="trade_tr_id" resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>

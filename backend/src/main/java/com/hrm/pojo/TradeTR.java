@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tradeex {
+public class TradeTR {
     private Integer trade_tr_id;
     private Integer product_id;
     private Integer user_id;

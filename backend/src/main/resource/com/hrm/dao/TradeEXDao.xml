@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hrm.dao.TradeEXDao">
+    <insert id="insertTrade" parameterType="TradeEX" >
+        <selectKey order="AFTER" keyProperty="trade_ex_id" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into trade_ex value (#{trade_ex_id},#{product_id},#{user_id},#{specification_id},
+        #{product_name}, #{experience_time},#{number})
+    </insert>
+</mapper>

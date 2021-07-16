@@ -61,6 +61,12 @@ export default {
           if (res.code === 0) {
             console.log(res.data.message);
             this.trials = res.data.products;
+            for (let i = 0; i < this.trials.length; i++) {
+              let item = this.trials[i];
+              if (item.list.length === 0) {
+                this.trials.splice(i, 1);
+              }
+            }
           } else {
             ElMessage.error({
               offset: 60,

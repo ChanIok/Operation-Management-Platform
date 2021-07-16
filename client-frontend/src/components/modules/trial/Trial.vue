@@ -180,7 +180,11 @@
 
 <script>
 import store from "../../../store";
-import { _getProductDetails } from "../../../api/trial/trial";
+import {
+  _getProductDetails,
+  _getProductSettlement,
+} from "../../../api/trial/trial";
+import { ElMessage } from "element-plus";
 export default {
   data() {
     return {
@@ -257,7 +261,33 @@ export default {
         });
     },
     confirm() {
-      this.dialogTableVisible = false;
+      _getProductSettlement(
+        this.tableData.product_id,
+        this.tableData.specification_id
+      )
+        .then((res) => {
+          if (res.code === 0) {
+            ElMessage.success({
+              message: res.data.message,
+              offset: 60,
+              type: "success",
+            });
+            this.dialogTableVisible = false;
+          } else {
+            ElMessage.error({
+              message: res.data.message,
+              offset: 60,
+              type: "error",
+            });
+          }
+        })
+        .catch((err) => {
+          ElMessage.success({
+            message: "领取失败",
+            offset: 60,
+            type: "success",
+          });
+        });
     },
     receiveTrial(item) {
       this.tableData = {
