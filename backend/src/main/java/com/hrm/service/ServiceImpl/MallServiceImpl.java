@@ -48,6 +48,11 @@ public class MallServiceImpl implements MallService {
     @Override
     public List<Specification> listSpecificationsByProductId(int product_id) {
         return specificationDao.listSpecificationsByProductId(product_id);
-
     }
+
+    @Override
+    public List<Specification> listTrialSpecificationsByProductId(int product_id) {
+        return specificationDao.listTrialSpecificationsByProductId(product_id);
+    }
+
 }

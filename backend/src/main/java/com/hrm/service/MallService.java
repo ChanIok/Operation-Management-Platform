@@ -17,4 +17,6 @@ public interface MallService {
     List<Application> listApplicationsByProductId(int product_id);
 
     List<Specification> listSpecificationsByProductId(int product_id);
+
+    List<Specification> listTrialSpecificationsByProductId(int product_id);
 }

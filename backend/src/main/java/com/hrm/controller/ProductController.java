@@ -1,13 +1,16 @@
 package com.hrm.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hrm.entry.Response;
-import com.hrm.pojo.Product;
-import com.hrm.pojo.Specification;
+import com.hrm.pojo.*;
 import com.hrm.service.ProductService;
 import com.hrm.service.SpecificationService;
 import com.hrm.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author zjw
@@ -99,4 +102,6 @@ public class ProductController {
 
         return res;
     }
+
+
 }

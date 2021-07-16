@@ -29,12 +29,10 @@ public class AuthorityController {
 
         //        创建响应类
         Response res = new Response();
-
         int user_id = JWTUtils.getUserId(token);
 
         try {
             Authority authority = authorityService.findAuthorityById(user_id);
-
             res.code  = 0;
             res.data.put("message","返回产品权限信息成功");
             res.data.put("trolley",authority);
@@ -45,9 +43,7 @@ public class AuthorityController {
             res.code  = 1;
             res.data.put("message","返回产品权限信息失败");
             res.data.put("trolley",null);
-
         }
-
         return res;
     }
 }

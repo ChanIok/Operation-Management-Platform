@@ -2,11 +2,15 @@ package com.hrm.service.ServiceImpl;
 
 
 import com.hrm.dao.ProductDao;
+import com.hrm.pojo.ID;
+import com.hrm.pojo.Objects;
+import com.hrm.pojo.PersonProduct;
 import com.hrm.pojo.Product;
 import com.hrm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +42,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public  List<Product> listTrialProductsByType(String type) {
+        return productDao.listTrialProductsByType(type);
+    }
+
+    @Override
     public int insertProduct(Product product) {
         return productDao.insertProduct(product);
     }
@@ -50,5 +59,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int updateProduct(Product product) {
         return productDao.updateProduct(product);
+    }
+
+    @Override
+    public ArrayList<PersonProduct> findByProductId(ID id) {
+        return productDao.findByProductId(id);
     }
 }
