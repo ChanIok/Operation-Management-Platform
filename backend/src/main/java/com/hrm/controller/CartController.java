@@ -249,23 +249,47 @@ public class CartController {
                 //设置过期时间
                 String dueDatetime = DateUtils.setDueDatetime(currentDatetime, buy_count);
 
-                //创建用户交易流水信息
-                tradeexArrayList.add(new Tradeex(null, product_id, user_id, specification_id, product_name, price, currentDatetime, buy_count));
-
-
                 System.out.println("当前时间" + currentDatetime);
                 System.out.println("过期时间" + dueDatetime);
 
-                System.out.println("管理端交易流水信息" + tradeexArrayList.get(i).toString());
+                try {
+                    //创建用户交易流水信息
+                    tradeexArrayList.add(new Tradeex(null, product_id, user_id, specification_id, product_name, price, currentDatetime, buy_count));
 
-                //插入交易流水信息信息
-                tradetrService.insertTrade(tradeexArrayList.get(i));
-                //System.out.println("trade 返回值" + trade);
+                    System.out.println("管理端交易流水信息" + tradeexArrayList.get(i).toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    res.code = 1;
+                    res.data.put("message","创建tradeex表失败");
+                    return res;
+                }
+
+                try {
+                    //插入交易流水信息信息
+                    tradetrService.insertTrade(tradeexArrayList.get(i));
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    res.code = 1;
+                    res.data.put("message","插入tradetr表失败");
+                    return res;
+                }
+
 
                 //创建用户交易信息
-                transactionArrayList.add(new Transaction(tradeexArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, currentDatetime, buy_count, currentDatetime));
+                try {
+                    transactionArrayList.add(new Transaction(tradeexArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, currentDatetime, buy_count, currentDatetime));
 
-                System.out.println("客户端交易流水信息" + transactionArrayList.get(i).toString());
+                    System.out.println("客户端交易流水信息" + transactionArrayList.get(i).toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    res.code = 1;
+                    res.data.put("message","transaction为空");
+                    return res;
+
+                }
 
                 int i1 = transactionService.insertTransaction(transactionArrayList.get(i));
 
@@ -277,8 +301,17 @@ public class CartController {
 
          //往产品权限表中添加用户信息
 
-                Authority authority = authorityService.checkAuthority(authorityArrayList.get(i));
-                System.out.println("产品权限表" + authority.toString());
+                Authority authority = null;
+                try {
+                    authority = authorityService.checkAuthority(authorityArrayList.get(i));
+
+                } catch (Exception e) {
+                    res.code = 1;
+                    res.data.put("message","authority为空");
+                    e.printStackTrace();
+                    return res;
+                }
+                //System.out.println("产品权限表" + authority.toString());
                 //如果产品权限表中无该条数据，则直接插入表中
                 if (authority == null){
                     authorityService.insertAuthority(authorityArrayList.get(i));
