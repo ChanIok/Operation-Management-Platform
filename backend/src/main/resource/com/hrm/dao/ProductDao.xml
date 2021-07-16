@@ -13,6 +13,14 @@
         select * from product where product_type = #{product_type}
     </select>
 
+    <select id="listTrialProductsByType" parameterType="string" resultType="Product">
+        SELECT product.product_id, product.product_name, product.product_type, product.introduction, product.img_url
+FROM product , specification
+WHERE product.product_type = #{product_type} AND specification.specification_type = "trial"
+AND specification.product_id = product.product_id
+GROUP BY product.product_id
+    </select>
+
     <update id="updateProductSurplus">
         update product set surplus = #{surplus} where product_id = #{product_id}
     </update>
@@ -24,16 +32,37 @@
         insert into product values(#{product_id},#{product_name},#{introduction},#{type},#{img_url})
     </insert>
 
-    <delete id="deleteProduct" parameterType="Product" >
+    <delete id="deleteProduct" parameterType="Product">
         delete  from application  where  product_id = #{product_id}
         delete  from advantage  where  product_id = #{product_id}
         delete  from specification  where  product_id = #{product_id}
         delete  from product where  product_id = #{product_id}
     </delete>
 
-    <update id="updateProduct" parameterType="Product" >
+    <update id="updateProduct" parameterType="Product">
         update product set product_name = #{product_name},introduction = #{introduction}, product_type = #{product_type},img_url = #{img_url}  where  product_id = #{product_id}
     </update>
 
+
+    <select id="findByProductId" parameterType="ID" resultType="PersonProduct">
+     select product.product_name, specification.specification_name ,specification.specification_type, authority.authority_time
+        from  authority  ,specification  ,product
+        where authority.user_id = #{user_id}
+        and  authority.product_id = specification.product_id
+        and authority.specification_id = specification.specification_id
+        and authority.product_id = product.product_id
+    </select>
+
+    <select id="findSingleExpProById" parameterType="int" resultType="map">
+        select c.product_id, c.title, c.content, c.img_url
+        from application as a, specification as b, application as c
+        where b.specification_type = "trial" and b.product_id = a.product_id
+        and b.product_id = c.product_id and
+    </select>
+
+    <select id="findAllExpProById" parameterType="int" resultType="map">
+        select c.product_id, c.title, c.content, c.img_url
+
+    </select>
 
 </mapper>

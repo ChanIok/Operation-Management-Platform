@@ -6,7 +6,11 @@
 <mapper namespace="com.hrm.dao.SpecificationDao">
 
     <select id="listSpecificationsByProductId" parameterType="int" resultType="Specification">
-        select * from specification where product_id = #{product_id}
+        select * from specification where product_id = #{product_id} and specification_type = "purchase"
+    </select>
+
+    <select id="listTrialSpecificationsByProductId" parameterType="int" resultType="Specification">
+        select * from specification where product_id = #{product_id} and specification_type = "trial"
     </select>
 
 

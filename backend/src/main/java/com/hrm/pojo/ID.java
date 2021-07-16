@@ -9,12 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ID {
 
-    private int user_id;
-    private int product_id;
-    private int specifications_id;
-    private int trade_id;
-
-    public ID(int user_id, Integer integer, Object o, Object o1) {
-        this.user_id = user_id;
-    }
+    private Integer user_id;
+    private Integer product_id;
+    private Integer specification_id;
+    private Integer trade_id;
 }

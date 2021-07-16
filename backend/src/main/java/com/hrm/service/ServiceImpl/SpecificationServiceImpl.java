@@ -25,6 +25,8 @@ public class SpecificationServiceImpl implements SpecificationService {
         return specificationService.listSpecificationsByProductId(product_id);
     }
 
+
+
     @Override
     public int insertSpecification(Specification specification) {
         return specificationService.insertSpecification(specification);

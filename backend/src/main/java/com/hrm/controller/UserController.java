@@ -7,14 +7,18 @@ import com.hrm.constant.MessageConstant;
 import com.hrm.entry.Response;
 
 import com.hrm.pojo.Balance;
+import com.hrm.pojo.ID;
+import com.hrm.pojo.PersonProduct;
 import com.hrm.pojo.UserInfo;
 
 import com.hrm.service.BalanceService;
+import com.hrm.service.ProductService;
 import com.hrm.service.UserService;
 import com.hrm.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +30,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private BalanceService balanceService;
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping(value = "/info", method = {RequestMethod.GET})
     @ResponseBody
@@ -112,5 +117,24 @@ public class UserController {
         return res;
     }
 
+    @RequestMapping(value = "/products")
+    @ResponseBody
+    public Object findUserProduct(@RequestHeader("token") String token) {
 
+        //创建响应类
+        Response res = new Response();
+        //在token里获取用户id
+        int user_id = JWTUtils.getUserId(token);
+        try {
+            ArrayList<PersonProduct> objectsArrayList = productService.findByProductId(new ID(user_id, null, null, null));
+            res.code = 0;
+            res.data.put("products",objectsArrayList);
+            res.data.put("message","已返回产品详情");
+        } catch (Exception e) {
+            res.code = 1;
+            res.data.put("message","返回产品详情失败");
+            e.printStackTrace();
+        }
+        return res;
+    }
 }
