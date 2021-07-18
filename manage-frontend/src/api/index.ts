@@ -5,16 +5,17 @@ interface IResponse {
   msg: any;
 }
 
-const baseURL: string = 'http://localhost:3000';
+const baseURL: string = 'http://localhost:8080';
 
 const api = axios.create({
   baseURL,
   timeout: 8000,
 });
 
+// 请求拦截
 api.interceptors.request.use((req: AxiosRequestConfig) => {
   const token: string = localStorage.getItem('token') as string;
-  req.headers['Authorization'] = `Bearer ${token}`;
+  req.headers['token'] = `${token}`;
   return req;
 });
 

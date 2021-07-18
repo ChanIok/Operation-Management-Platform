@@ -51,6 +51,7 @@
 <script  >
 import store from "../../store";
 import { _login } from "../../api/auth/auth";
+import { ElMessage } from "element-plus";
 export default {
   name: "LoginForm",
   data() {
@@ -109,23 +110,26 @@ export default {
   },
   methods: {
     login(LoginFormData) {
-      // 待拿到api
-      // this.$refs[LoginFormData].validate((valid) => {
-      //   if (valid) {
-      //     console.log("submit!");
-      //     _login(this.LoginFormData).then((res) => {
-      //       if (res.msg.token && res.code === 0) {
-      //         localStorage.setItem("token", res.msg.token);
-      //         localStorage.setItem("userID", res.msg.userID);
-      //         console.log("save token!");
-      //         this.$router.push('/index')
-      //       }
-      //     });
-      //   } else {
-      //     console.log("error submit!!");
-      //   }
-      // });
-      this.$router.push("/index");
+      this.$refs[LoginFormData].validate((valid) => {
+        if (valid) {
+          _login(this.LoginFormData).then((res) => {
+            if (res.data.token && res.code === 0) {
+              localStorage.setItem("token", res.data.token);
+              console.log("save token!");
+              ElMessage.success({
+                message: "登陆成功！",
+                offset: 60,
+                type: "success",
+              });
+              this.$router.push("/index");
+            } else {
+              ElMessage.error("登录失败！");
+            }
+          });
+        } else {
+          ElMessage.error("登录失败！");
+        }
+      });
     },
     changeEvent(newEvent) {
       store.commit("setEvent", newEvent);

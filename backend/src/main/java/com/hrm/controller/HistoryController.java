@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hrm.entry.Response;
 import com.hrm.pojo.Authority;
 import com.hrm.pojo.Transaction;
+import com.hrm.pojo.TransactionHistory;
+import com.hrm.pojo.ExperienceHistory;
 import com.hrm.service.AuthorityService;
+import com.hrm.service.TransactionHistoryService;
 import com.hrm.service.TransactionService;
 import com.hrm.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +25,13 @@ import java.util.ArrayList;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/transaction")
-public class TransactionController {
+public class HistoryController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private TransactionHistoryService transactionHistoryService;
 
     @RequestMapping("/find")
     @ResponseBody
@@ -55,4 +61,30 @@ public class TransactionController {
 
         return res;
     }
+
+    @RequestMapping("/findAllTrHistory")
+    @ResponseBody
+    public Object findAllTrHistory() {
+        //        创建响应类
+        Response res = new Response();
+
+        ArrayList<TransactionHistory> transactionHistory = transactionHistoryService.findTransactionHistory();
+
+        res.data.put("trHistory",transactionHistory);
+        return res;
+    }
+
+
+    @RequestMapping("/findAllExHistory")
+    @ResponseBody
+    public Object findAllExHistory() {
+        //        创建响应类
+        Response res = new Response();
+
+        ArrayList<ExperienceHistory> ExperienceHistory = transactionHistoryService.findExperienceHistory();
+
+        res.data.put("exHistory",ExperienceHistory);
+        return res;
+    }
+
 }

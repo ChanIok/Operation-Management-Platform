@@ -13,6 +13,6 @@
     </insert>
     
     <select id="findTransactionById" parameterType="int" resultType="Transaction" >
-        select * from transaction where user_id = #{user_id};
+        select * from transaction where user_id = #{user_id}
     </select>
 </mapper>

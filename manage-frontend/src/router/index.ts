@@ -1,7 +1,9 @@
 import * as VueRouter from 'vue-router';
 import auth from '../views/Auth.vue';
 import main from '../views/Main.vue';
-import PersonalData from '../components/modules/employee-info/PersonalData.vue';
+import transactionHistory from '../components/modules/employee-info/transactionHistory.vue';
+import giftHistory from '../components/modules/employee-info/giftHistory.vue';
+import merchandiseControler from '../components/modules/employee-info/merchandiseControler.vue';
 const routes = [
   { path: '/', component: auth },
   {
@@ -9,8 +11,16 @@ const routes = [
     component: main,
     children: [
       {
-        path: 'employee-info/personal-data',
-        component: PersonalData,
+        path: 'employee-info/transactionHistory',
+        component: transactionHistory,
+      },
+      {
+        path: 'employee-info/giftHistory',
+        component: giftHistory,
+      },
+      {
+        path: 'employee-info/merchandiseControler',
+        component: merchandiseControler,
       },
     ],
   },
