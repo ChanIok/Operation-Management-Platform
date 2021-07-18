@@ -1,10 +1,11 @@
 package com.hrm.service;
 
 
-import com.hrm.pojo.Login;
+
+import com.hrm.pojo.User;
 import com.hrm.pojo.UserInfo;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author zjw
@@ -12,15 +13,17 @@ import java.util.List;
  * @Date 2021/7/9
  * @Time 15:54
  */
-public interface LoginService {
+public interface AuthService {
 
     String findById(String username);
 
     String findByPermission(String username);
 
-    int registerUser(Login login);
+    int registerUser(User user);
 
-    int findIdbyName(String username);
+    int findIdByName(String username);
 
     int setUserInfo(UserInfo userInfo);
+
+    Map<String,String> getPasswordAndSaltByUsername(String username);
 }

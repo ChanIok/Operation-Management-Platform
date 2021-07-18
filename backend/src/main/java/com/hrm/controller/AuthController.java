@@ -5,17 +5,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.hrm.constant.Constant;
 import com.hrm.constant.MessageConstant;
 import com.hrm.entry.Response;
-import com.hrm.pojo.Login;
+import com.hrm.pojo.Auth;
+import com.hrm.pojo.User;
 import com.hrm.pojo.UserInfo;
 import com.hrm.service.BalanceService;
-import com.hrm.service.LoginService;
+import com.hrm.service.AuthService;
 import com.hrm.utils.JWTUtils;
-import com.hrm.utils.JsonUtils;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * @author zjw
@@ -30,7 +32,7 @@ import java.util.HashMap;
 public class AuthController {
 
     @Autowired
-    private LoginService loginService;
+    private AuthService authService;
 
     @Autowired
     private BalanceService balanceService;
@@ -48,22 +50,24 @@ public class AuthController {
         String password = jsonObj.getString("password");
 
         //判断是否为空
-        String byId = loginService.findById(username);
-        if (byId == null) {
+        Map<String,String> PasswordAndSalt = authService.getPasswordAndSaltByUsername(username);
+        if (PasswordAndSalt == null) {
 //        登录失败，返回状态码:2
             res.code = Constant.CODE_LOGIN_FAILED;
             res.data.put("message", MessageConstant.LOGIN_FAILURE);
             return res;
         }
+        String passwordWithSalt = PasswordAndSalt.get("password");
+        String salt  = PasswordAndSalt.get("salt");
 
 
-        if (byId.equals(password)) {
-            String byPermission = loginService.findByPermission(username);
+        if (passwordWithSalt.equals(DigestUtils.md5DigestAsHex((password + salt).getBytes()))) {
+            String byPermission = authService.findByPermission(username);
             System.out.println(byPermission);
 
-            int idByName = loginService.findIdbyName(username);
+            int idByName = authService.findIdByName(username);
             System.out.println(idByName);
-            payload.put("user_id", String.valueOf(loginService.findIdbyName(username)));
+            payload.put("user_id", String.valueOf(authService.findIdByName(username)));
             String token = JWTUtils.getToken(payload);
 
             res.data.put("token", token);
@@ -81,7 +85,7 @@ public class AuthController {
     }
 
 
-    @RequestMapping("/regist")
+    @RequestMapping("/register")
     @ResponseBody
     public Object register(@RequestBody JSONObject jsonObj) {
 
@@ -94,9 +98,9 @@ public class AuthController {
 //      读取注册名字（不能同名）
         String username = jsonObj.getString("username");
 
-        String byId = loginService.findById(username);
+        String byId = authService.findById(username);
 
-        if (loginService.findById(username) != null) {
+        if (authService.findById(username) != null) {
 
             res.code = Constant.CODE_REGISTER_USERNAME_DUPLICATE;
             res.data.put("message", MessageConstant.REUSE_NAME);
@@ -106,10 +110,22 @@ public class AuthController {
 //      获取注册密码
         String password = jsonObj.getString("password");
 
-        Login login = new Login(0, username, password, Constant.DOMESTIC_USER);
+//        生成随机数来获取盐
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 5; i++) {
+            int number = random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        String salt = sb.toString();
+//        加盐
+        String passwordWithSalt = DigestUtils.md5DigestAsHex((password + salt).getBytes());
+
+        User user = new User(0, username, passwordWithSalt, Constant.DOMESTIC_USER, salt);
 
 //      注册到user表
-        if (1 != loginService.registerUser(login)) {
+        if (1 != authService.registerUser(user)) {
             res.code = Constant.CODE_REGISTER_DATABASE_OP_FAILED;
             res.data.put("message", MessageConstant.REGISTER_FAILURE);
             return res;
@@ -121,20 +137,20 @@ public class AuthController {
 //      获取电子邮箱
         String email = jsonObj.getString("email");
 
-        int idByName = loginService.findIdbyName(username);
+        int idByName = authService.findIdByName(username);
 
         System.out.println(idByName);
 
 
 //      判断是否插入成功
-        if (loginService.setUserInfo(new UserInfo(idByName, phone_num, email)) < 0) {
+        if (authService.setUserInfo(new UserInfo(idByName, phone_num, email)) < 0) {
             res.code = Constant.CODE_REGISTER_DATABASE_OP_FAILED;
             res.data.put("message", MessageConstant.REGISTER_FAILURE);
             return res;
         }
 
         //初始化账户
-        int user_id = loginService.findIdbyName(username);
+        int user_id = authService.findIdByName(username);
         balanceService.addBalance(user_id);
 
         res.code = Constant.CODE_SUCCESS;

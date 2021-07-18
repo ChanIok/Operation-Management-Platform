@@ -1,5 +1,9 @@
 package com.hrm.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -8,30 +12,17 @@ import java.io.Serializable;
  * @Date 2021/7/10
  * @Time 19:13
  */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
+    private int user_id;
     private String username;
     private String password;
-
+    private Integer permission;
+    private String salt;
     public String getUsername() {
         return username;
-    }
-
-    public User() {}
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

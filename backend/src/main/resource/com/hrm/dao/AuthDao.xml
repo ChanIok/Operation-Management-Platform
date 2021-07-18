@@ -6,7 +6,7 @@
 <!--
     根标签mapper必须包含namespace属性，该属性的值就是对应Dao接口的全限命名
 -->
-<mapper namespace="com.hrm.dao.LoginDao">
+<mapper namespace="com.hrm.dao.AuthDao">
     <!--
         每一个子标签，就对应Dao接口的一个方法
         查询方法对应select标签
@@ -21,6 +21,11 @@
         select password from user where username = #{username}
     </select>
 
+    <select id="getPasswordAndSaltByUsername" parameterType="String" resultType="map">
+        select password,salt from user where username = #{username}
+    </select>
+
+
     <select id="findByPermission" parameterType="String" resultType="String">
         select permission from user where username = #{username}
     </select>
@@ -29,10 +34,10 @@
         select user_id from user where username = #{username};
     </select>
 
-    <insert id="registerUser" parameterType="Login" keyProperty="user_id" useGeneratedKeys="true">
-         insert into user(user_id,username,password,permission)
+    <insert id="registerUser" parameterType="User" keyProperty="user_id" useGeneratedKeys="true">
+         insert into user(user_id,username,password,permission,salt)
         VALUE
-        (#{user_id}, #{username}, #{password}, #{permission})
+        (#{user_id}, #{username}, #{password}, #{permission} , #{salt})
     </insert>
 
     <insert id="setUserInfo" parameterType="UserInfo" keyProperty="user_id" useGeneratedKeys="true">

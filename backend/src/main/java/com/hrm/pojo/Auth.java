@@ -10,20 +10,20 @@ import java.io.Serializable;
  * @Date 2021/7/9
  * @Time 15:51
  */
-public class Login implements Serializable {
+public class Auth implements Serializable {
     private int user_id;
     private String username;
     private String password;
     private Integer permission;
 
-    public Login(int id, String username, String password, Integer permission) {
+    public Auth(int id, String username, String password, Integer permission) {
         this.user_id = id;
         this.username = username;
         this.password = password;
         this.permission = permission;
     }
 
-    public Login() {}
+    public Auth() {}
 
     public int getId() {
         return user_id;
