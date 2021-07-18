@@ -57,7 +57,7 @@ GROUP BY product.product_id
         select c.product_id, c.title, c.content, c.img_url
         from application as a, specification as b, application as c
         where b.specification_type = "trial" and b.product_id = a.product_id
-        and b.product_id = c.product_id and
+        and b.product_id = c.product_id
     </select>
 
     <select id="findAllExpProById" parameterType="int" resultType="map">

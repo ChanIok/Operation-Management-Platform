@@ -8,23 +8,19 @@
     >
       <el-menu-item index="1">
         <i class="el-icon-user"></i>
-        <template #title>产品管理</template>
+        <template #title>商品交易历史记录</template>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-document-checked"></i>
-        <template #title>平台用户管理</template>
+        <template #title>赠送体验商品历史记录</template>
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-coordinate"></i>
-        <template #title>交易订单管理</template>
+        <template #title>收费商品管理</template>
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-document"></i>
-        <template #title>体验订单管理</template>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <template #title>系统管理</template>
+        <template #title>体验商品管理</template>
       </el-menu-item>
     </el-menu>
   </div>
@@ -42,7 +38,9 @@ export default {
       isFinance: true,
       isStaff: true,
       mapper: {
-        1: "/index/employee-info/personal-data",
+        1: "/index/employee-info/transactionHistory",
+        2: "/index/employee-info/giftHistory",
+        3: "/index/employee-info/merchandiseControler",
       },
     };
   },

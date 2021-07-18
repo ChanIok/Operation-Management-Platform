@@ -17,9 +17,14 @@
     </facet>
     <facet type="Spring" name="Spring">
       <configuration>
+        <fileset id="web dispatcherServlet servlet context" name="MVC dispatcherServlet servlet context" removed="true">
+          <file>file://$MODULE_DIR$/src/main/resource/applicationContext.xml</file>
+        </fileset>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resource/applicationContext-dao.xml</file>
           <file>file://$MODULE_DIR$/src/main/resource/applicationContext.xml</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/jboss/netty/netty/3.2.5.Final/netty-3.2.5.Final.jar!/org/jboss/netty/container/spring/beans.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/jboss/netty/netty/3.2.5.Final/netty-3.2.5.Final.jar</file>
         </fileset>
       </configuration>
     </facet>

@@ -37,8 +37,6 @@ public class CartController {
     @Autowired
     private BalanceService balanceService;
 
-    @Autowired
-    private TransactionService transactionService;
 
     @Autowired
     private TradeTRService tradetrService;
@@ -279,7 +277,7 @@ public class CartController {
 
                 //创建用户交易信息
                 try {
-                    transactionArrayList.add(new Transaction(tradeTRArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, currentDatetime, buy_count, currentDatetime));
+                    transactionArrayList.add(new Transaction(tradeTRArrayList.get(i).getTrade_tr_id(), user_id, product_id, specification_id, product_name, dueDatetime, buy_count, currentDatetime));
 
                     System.out.println("客户端交易流水信息" + transactionArrayList.get(i).toString());
                 } catch (Exception e) {
@@ -291,7 +289,7 @@ public class CartController {
 
                 }
 
-                int i1 = transactionService.insertTransaction(transactionArrayList.get(i));
+        
 
                 //从用户购物车中删除
                 cartService.deleteProduct(new Cart(user_id, product_id, buy_count, specification_id));

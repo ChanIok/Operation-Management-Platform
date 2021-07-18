@@ -13,26 +13,26 @@ import java.util.Map;
  * @Time 19:10
  */
 public class TestMap {
-   @Test
-    public void Map(){
+    @Test
+    public void Map() {
 
 
-       Map<String, Integer> map = new HashMap<>();
-       map.put("1",1);
-       map.put("2",2);
-       map.put("3",3);
-       map.put("4",4);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
 
 
-       ArrayList<Map<String,Integer>> list = new ArrayList<Map<String, Integer>>();
+        ArrayList<Map<String, Integer>> list = new ArrayList<Map<String, Integer>>();
         list.add(map);
 
-       for (Map<String,Integer> map1: list) {
-           for (String s: map1.keySet()
-                ) {
-               System.out.println("key:" + s + "\t");
-               System.out.println("value" + map1.get(s));
-           }
-       }
-   }
+        for (Map<String, Integer> map1 : list) {
+            for (String s : map1.keySet()
+            ) {
+                System.out.println("key:" + s + "\t");
+                System.out.println("value" + map1.get(s));
+            }
+        }
+    }
 }

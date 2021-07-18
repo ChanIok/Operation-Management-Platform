@@ -12,7 +12,7 @@
         @click="changeIsCollapse"
       ></i>
     </div>
-    <div id="title">云业务综合运营支撑平台</div>
+    <div id="title">云业务综合运营管理平台</div>
     <div id="user-wrapper">
       <i class="el-icon-user-solid"></i>
     </div>
@@ -54,7 +54,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   line-height: 60px;
- 
+
   #aside-controller {
     cursor: pointer;
     font-size: 26px;
@@ -67,7 +67,7 @@ export default {
   #title {
     font-weight: 800;
     font-size: 20px;
-    @media screen and (max-width: 380px){
+    @media screen and (max-width: 380px) {
       display: none;
     }
   }
