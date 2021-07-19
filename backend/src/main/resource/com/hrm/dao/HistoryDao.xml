@@ -4,16 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hrm.dao.HistoryDao">
-    <select id="findTransactionHistory"  resultType="TransactionHistory" >
+    <select id="findTransactionHistory"  resultType="TransactionHistory" parameterType="Page">
         SELECT trade_tr.trade_tr_id,trade_tr.user_id, `user`.username,trade_tr.product_name,specification.specification_name,
                specification.price,trade_tr.number,trade_tr.transaction_time, (specification.price*trade_tr.number) as total_price
         FROM trade_tr , specification ,  `user`
         WHERE trade_tr.product_id=specification.product_id AND trade_tr.specification_id=specification.specification_id
           AND trade_tr.user_id= `user`.user_id
         ORDER BY  trade_tr_id desc
+        LIMIT #{page_num_start},#{page_num_end}
     </select>
 
-    <select id="findExperienceHistory"  resultType="ExperienceHistory" >
+    <select id="findExperienceHistory"  resultType="ExperienceHistory"  parameterType="Page">
 
         SELECT trade_ex.trade_ex_id,trade_ex.user_id,`user`.username,trade_ex.product_name,specification.specification_name,
                trade_ex.number,trade_ex.experience_time
@@ -21,5 +22,6 @@
         WHERE trade_ex.product_id=specification.product_id AND trade_ex.specification_id=specification.specification_id
           AND trade_ex.user_id=user.user_id
         ORDER BY  trade_ex_id desc
+        LIMIT #{page_num_start},#{page_num_end}
     </select>
 </mapper>

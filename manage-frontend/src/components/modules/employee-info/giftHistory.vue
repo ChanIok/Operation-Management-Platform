@@ -8,19 +8,25 @@
       style="width: 100%; font-size: 18px"
       :row-style="{ height: '80px' }"
     >
-      <el-table-column type="index" :index="indexMethod"> </el-table-column>
       <el-table-column prop="trade_tr_id" label="体验订单号" width="120">
       </el-table-column>
       <el-table-column prop="user_id" label="客户id" width="100">
       </el-table-column>
-      <el-table-column prop="user_name" label="客户名"> </el-table-column>
-      <el-table-column prop="produce_name" label="产品名称"> </el-table-column>
+      <el-table-column prop="username" label="客户名"> </el-table-column>
+      <el-table-column prop="product_name" label="产品名称" width="180">
+      </el-table-column>
       <el-table-column prop="specification_name" label="规格">
       </el-table-column>
-      <el-table-column prop="num" label="数量" width="100"> </el-table-column>
-      <el-table-column prop="tramsaction_time" label="赠送时间" width="180">
+      <el-table-column prop="number" label="数量" width="100">
+      </el-table-column>
+      <el-table-column prop="transaction_time" label="赠送时间" width="230">
       </el-table-column>
     </el-table>
+    <div class="index">
+      <i class="el-icon-caret-left page" @click="page_up()"></i>
+      <span class="page">{{ pageIndex }}</span>
+      <i class="el-icon-caret-right page" @click="page_down()"></i>
+    </div>
   </div>
 </template>
 
@@ -28,109 +34,80 @@
 #giftHistory {
   height: 100%;
   width: 100%;
+  background-color: aquamarine;
+  .page {
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    text-align: center;
+    line-height: 80px;
+  }
+  .index {
+    width: 250px;
+    height: 80px;
+    margin: 0 auto;
+  }
 }
 </style>
 
 <script>
-
+import { _getExHistory } from "../../../api/history/exHistory.ts";
 export default {
   data() {
     return {
       tableData: [
         {
-          trade_tr_id: "00000001",
+          trade_tr_id: "",
           user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000002",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000003",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t6",
-          price: 200,
-          num: 2,
-          total_price: 400,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000004",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "突发性能实例 t5",
-          price: 200,
-          num: 2,
-          total_price: 400,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000005",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "共享型实例s6",
-          price: 500,
-          num: 1,
-          total_price: 500,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000006",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "共享型实例s6",
-          price: 500,
-          num: 1,
-          total_price: 500,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000007",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "共享型实例s6",
-          price: 500,
-          num: 1,
-          total_price: 500,
-          tramsaction_time: "2021-01-01",
-        },
-        {
-          trade_tr_id: "00000008",
-          user_id: 1,
-          user_name: "啊伟子",
-          produce_name: "云服务器ECS",
-          specification_name: "共享型实例s6",
-          price: 500,
-          num: 1,
-          total_price: 500,
-          tramsaction_time: "2021-01-01",
+          user_name: "",
+          produce_name: "",
+          specification_name: "",
+          price: "",
+          num: "",
+          total_price: "",
+          tramsaction_time: "",
         },
       ],
+      pageIndex: 1,
     };
   },
   methods: {
-    indexMethod(index) {
-      return index + 1;
+    page_up() {
+      if (this.pageIndex > 1) {
+        this.pageIndex--;
+        this.getExHistory();
+      }
+    },
+    page_down() {
+      this.pageIndex++;
+      this.getExHistory();
+    },
+    getExHistory() {
+      console.log(this.limit);
+      _getExHistory(this.limit)
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res.data.exHistory);
+            this.tableData = res.data.exHistory;
+          } else {
+            console.log(res.data.exHistory);
+          }
+        })
+        .catch((err) => {
+          console.log("获取交易历史失败！");
+        });
+    },
+  },
+  mounted() {
+    this.getExHistory();
+  },
+  computed: {
+    limit() {
+      let limit = {
+        page_num_start: (this.pageIndex - 1) * 10,
+        page_num_end: (this.pageIndex - 1) * 10 + 9,
+      };
+      return limit;
     },
   },
 };
