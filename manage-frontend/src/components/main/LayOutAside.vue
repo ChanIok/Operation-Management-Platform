@@ -14,7 +14,6 @@
         <i class="el-icon-document-checked"></i>
         <template #title>体验记录管理</template>
       </el-menu-item>
- 
 
       <el-submenu index="3">
         <template #title>
@@ -54,6 +53,7 @@ export default {
         "3-2": "/index/products/manage",
         "3-3": "/index/products/specification/list",
         "3-4": "/index/products/specification/manage",
+        4: "/index/user-management",
       },
     };
   },

@@ -31,4 +31,10 @@
 
     </update>
 
+    <select id="findUserList"  resultType="UserList" parameterType="Page">
+        SELECT user.user_id,user.username,user.permission
+        FROM `user`
+        LIMIT #{page_num_start},#{page_num_end}
+    </select>
+
 </mapper>

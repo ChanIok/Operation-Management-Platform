@@ -13,6 +13,9 @@ import SpecificationManage from '../components/modules/product-manage/Specificat
 import ProductWrapper from '../components/modules/product-manage/ProductWrapper.vue';
 
 import merchandiseControler from '../components/modules/employee-info/merchandiseControler.vue';
+
+import userManagement from '../components/modules/user-management/userManagement.vue';
+
 const routes = [
   { path: '/', component: auth },
   {
@@ -53,6 +56,10 @@ const routes = [
             component: SpecificationManage,
           },
         ],
+      },
+      {
+        path: 'user-management',
+        component: userManagement,
       },
     ],
   },
