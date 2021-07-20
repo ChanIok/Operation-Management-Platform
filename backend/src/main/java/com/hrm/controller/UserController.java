@@ -6,10 +6,7 @@ import com.hrm.constant.Constant;
 import com.hrm.constant.MessageConstant;
 import com.hrm.entry.Response;
 
-import com.hrm.pojo.Balance;
-import com.hrm.pojo.ID;
-import com.hrm.pojo.PersonProduct;
-import com.hrm.pojo.UserInfo;
+import com.hrm.pojo.*;
 
 import com.hrm.service.BalanceService;
 import com.hrm.service.ProductService;
@@ -135,6 +132,41 @@ public class UserController {
             res.data.put("message","返回产品详情失败");
             e.printStackTrace();
         }
+        return res;
+    }
+
+
+    @RequestMapping("/find")
+    @ResponseBody
+    public Object findUserList(@RequestBody JSONObject jsonObj) {
+
+        //        创建响应类
+        Response res = new Response();
+
+        try {
+            Map<String, Object> limit = new HashMap<>();
+
+            for (Map.Entry<String, Object> entry : jsonObj.entrySet()) {
+                limit.put(entry.getKey(), entry.getValue());
+            }
+
+            Page page_num = new Page((Integer) limit.get("page_num_start"),(Integer) limit.get("page_num_end"));
+
+
+            ArrayList<UserList> userList = userService.findUserList(page_num);
+            res.code = 0;
+            res.data.put("message","返回用户列表成功");
+            res.data.put("datalist",userList);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.code = 0;
+            res.data.put("message","返回用户列表失败");
+            res.data.put("datalist",null);
+
+        }
+
         return res;
     }
 }
