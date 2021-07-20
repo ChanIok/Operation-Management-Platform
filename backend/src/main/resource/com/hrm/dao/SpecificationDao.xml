@@ -13,9 +13,12 @@
         select * from specification where product_id = #{product_id} and specification_type = "trial"
     </select>
 
+    <select id="listSpecification"  resultType="Specification" parameterType="Page">
+        select * from specification LIMIT #{page_num_start},#{page_num_end}
+    </select>
 
     <insert id="insertSpecification" parameterType="Specification">
-        insert into specification values(#{product_id},#{specification_id},#{specification_name},#{price},#{description}) where  product_id = #{product_id}
+        insert into specification values(#{product_id},#{specification_id},#{specification_name},#{price},#{description}, #{specification_type})
     </insert>
 
     <delete id="deleteSpecification" parameterType="Specification" >

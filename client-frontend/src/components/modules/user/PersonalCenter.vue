@@ -306,7 +306,6 @@ export default {
         .then(() => {
           // 获取余额
           _getUserBalance().then((res) => {
-      
             if (res.code === 0) {
               console.log(res.data.message);
               this.balance = res.data.balance;
@@ -328,7 +327,6 @@ export default {
                   this.trial.push(item);
                 }
               }
-         
             } else {
               throw err;
             }
@@ -363,7 +361,7 @@ export default {
   },
   mounted() {
     this.getUserInfo();
-      this.setDialogSize(window.innerWidth);
+    this.setDialogSize(window.innerWidth);
   },
   computed: {
     getWidth() {

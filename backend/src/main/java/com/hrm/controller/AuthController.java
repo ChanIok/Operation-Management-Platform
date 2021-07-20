@@ -10,6 +10,7 @@ import com.hrm.pojo.User;
 import com.hrm.pojo.UserInfo;
 import com.hrm.service.BalanceService;
 import com.hrm.service.AuthService;
+import com.hrm.service.UserService;
 import com.hrm.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -33,6 +34,8 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+
 
     @Autowired
     private BalanceService balanceService;
@@ -62,8 +65,62 @@ public class AuthController {
 
 
         if (passwordWithSalt.equals(DigestUtils.md5DigestAsHex((password + salt).getBytes()))) {
-            String byPermission = authService.findByPermission(username);
+            int byPermission = authService.getPermissionByUsername(username);
             System.out.println(byPermission);
+
+            int idByName = authService.findIdByName(username);
+            System.out.println(idByName);
+            payload.put("user_id", String.valueOf(authService.findIdByName(username)));
+            String token = JWTUtils.getToken(payload);
+
+            res.data.put("token", token);
+            res.data.put("permission", byPermission);
+            res.data.put("message", MessageConstant.LOGIN_SUCCESS);
+
+//            登录成功，返回状态码:0
+            res.code = Constant.CODE_SUCCESS;
+            return res;
+        }
+        res.data.put("message", MessageConstant.LOGIN_FAILURE);
+//        登录失败，返回状态码:2
+        res.code = Constant.CODE_LOGIN_FAILED;
+        return res;
+    }
+
+    @RequestMapping("/management-login")
+    @ResponseBody
+    public Object managementLogin(@RequestBody JSONObject jsonObj) {
+
+//        创建响应类
+        Response res = new Response();
+        HashMap<String, String> payload = new HashMap<>();
+
+        //读取json里的信息
+        String username = jsonObj.getString("username");
+        String password = jsonObj.getString("password");
+
+
+
+        //判断是否为空
+        Map<String,String> PasswordAndSalt = authService.getPasswordAndSaltByUsername(username);
+        if (PasswordAndSalt == null) {
+//        登录失败，返回状态码:2
+            res.code = Constant.CODE_LOGIN_FAILED;
+            res.data.put("message", MessageConstant.LOGIN_FAILURE);
+            return res;
+        }
+        String passwordWithSalt = PasswordAndSalt.get("password");
+        String salt  = PasswordAndSalt.get("salt");
+
+
+        if (passwordWithSalt.equals(DigestUtils.md5DigestAsHex((password + salt).getBytes()))) {
+            int byPermission = authService.getPermissionByUsername(username);
+//            越权登录
+            if(byPermission>3){
+                res.code = Constant.CODE_LOGIN_FAILED;
+                res.data.put("message", "越权登录");
+                return res;
+            }
 
             int idByName = authService.findIdByName(username);
             System.out.println(idByName);

@@ -1,20 +1,13 @@
 package com.hrm.controller;
-
 import com.hrm.constant.Constant;
 import com.hrm.entry.Response;
-import com.hrm.pojo.Advantage;
-import com.hrm.pojo.Cart;
-import com.hrm.pojo.Product;
 import com.hrm.service.MallService;
-import com.hrm.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @CrossOrigin(allowCredentials = "true", allowedHeaders = "*")

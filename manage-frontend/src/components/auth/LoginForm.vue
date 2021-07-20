@@ -29,17 +29,10 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <div class="retrieve-wapper">
-        <span class="retrieve-password" @click="changeEvent('alter')"
-          >忘记密码？</span
-        >
-      </div>
+      <div class="retrieve-wapper"></div>
       <div class="auth-button">
         <el-button type="primary" @click="login('LoginFormData')"
           >登录</el-button
-        >
-        <el-button type="warning" @click="changeEvent('regist')"
-          >注册</el-button
         >
       </div>
     </article>
@@ -117,17 +110,15 @@ export default {
               localStorage.setItem("token", res.data.token);
               console.log("save token!");
               ElMessage.success({
-                message: "登陆成功！",
+                message: res.data.message,
                 offset: 60,
                 type: "success",
               });
               this.$router.push("/index");
             } else {
-              ElMessage.error("登录失败！");
+              ElMessage.error(res.data.message);
             }
           });
-        } else {
-          ElMessage.error("登录失败！");
         }
       });
     },

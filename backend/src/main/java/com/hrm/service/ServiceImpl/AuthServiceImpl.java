@@ -31,8 +31,8 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public String findByPermission(String username) {
-        return authDao.findByPermission(username);
+    public int getPermissionByUsername(String username) {
+        return authDao.getPermissionByUsername(username);
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface AuthService {
 
     String findById(String username);
 
-    String findByPermission(String username);
+   int getPermissionByUsername(String username);
 
     int registerUser(User user);
 

@@ -1,9 +1,6 @@
 package com.hrm.service;
 
-import com.hrm.pojo.ID;
-import com.hrm.pojo.Objects;
-import com.hrm.pojo.PersonProduct;
-import com.hrm.pojo.Product;
+import com.hrm.pojo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +25,15 @@ public interface ProductService {
     //    根据类型获取该类型所有体验产品的基本信息
     List<Product> listTrialProductsByType(String type);
 
+    List<Product> listProducts(Page page_num);
     //增加product的信息
     int insertProduct(Product product);
 
     //删除product的信息
     int deleteProduct(Product product);
+
+    //删除product其他表的信息
+    int  deleteProductInOtherTable(Product product);
 
     //修改product的信息
     int updateProduct(Product product);

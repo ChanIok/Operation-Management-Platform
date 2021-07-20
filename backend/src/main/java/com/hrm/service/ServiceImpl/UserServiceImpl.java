@@ -23,7 +23,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateUserInfo(Object userInfo){
+    public int updateUserInfo(Object userInfo) {
         return userDao.updateUserInfo(userInfo);
     }
+
+
 }

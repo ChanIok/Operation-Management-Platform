@@ -14,7 +14,7 @@ interface IUser {
  * @returns
  */
 export async function _login(user: IUser) {
-  return api({ method: 'POST', url: '/auth/login', data: user });
+  return api({ method: 'POST', url: '/auth/management-login', data: user });
 }
 
 /**
@@ -23,5 +23,5 @@ export async function _login(user: IUser) {
  * @returns 
  */
 export async function _regist(user: IUser) {
-  return api({ method: 'POST', url: '/auth/regist', data: user });
+  return api({ method: 'POST', url: '/auth/register', data: user });
 }

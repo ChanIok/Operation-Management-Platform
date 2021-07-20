@@ -69,7 +69,7 @@
           </div>
         </div>
 
-        <div class="advantage details-item">
+        <div class="advantage details-item"  v-if="details.advantage.length !== 0">
           <div class="anchor" id="adv"></div>
           <div class="title">产品优势</div>
           <div class="list-wrapper">
@@ -91,7 +91,10 @@
           </div>
         </div>
 
-        <div class="application details-item">
+        <div
+          class="application details-item"
+          v-if="details.application.length !== 0"
+        >
           <div class="anchor" id="apply"></div>
           <div class="title">应用场景</div>
           <div class="application-wrapper">
@@ -228,6 +231,7 @@ export default {
         .catch((err) => {
           ElMessage.error("获取产品详情失败！");
         });
+      console.log(this.details.application);
     },
     addToCart(item) {
       this.productInCart = {

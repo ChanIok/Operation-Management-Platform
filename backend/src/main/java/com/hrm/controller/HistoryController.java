@@ -25,7 +25,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/transaction")
+@RequestMapping("/history")
 public class HistoryController {
 
     @Autowired
@@ -47,23 +47,23 @@ public class HistoryController {
             ArrayList<Transaction> transactionList = transactionService.findTransactionById(user_id);
 
             res.code = 0;
-            res.data.put("message","返回历史购买订单成功");
-            res.data.put("trolley",transactionList);
+            res.data.put("message", "返回历史购买订单成功");
+            res.data.put("trolley", transactionList);
 
 
         } catch (Exception e) {
             e.printStackTrace();
 
             res.code = 0;
-            res.data.put("message","返回历史购买订单失败");
-            res.data.put("trolley",null);
+            res.data.put("message", "返回历史购买订单失败");
+            res.data.put("trolley", null);
 
         }
 
         return res;
     }
 
-    @RequestMapping("/findAllTrHistory")
+    @RequestMapping("/trade")
     @ResponseBody
     public Object findAllTrHistory(@RequestBody JSONObject jsonObj) {
         //        创建响应类
@@ -76,16 +76,16 @@ public class HistoryController {
             limit.put(entry.getKey(), entry.getValue());
         }
 
-        Page page_num = new Page((Integer) limit.get("page_num_start"),(Integer) limit.get("page_num_end"));
+        Page page_num = new Page((Integer) limit.get("page_num_start"), (Integer) limit.get("page_num_end"));
 
         ArrayList<TransactionHistory> transactionHistory = transactionHistoryService.findTransactionHistory(page_num);
 
-        res.data.put("trHistory",transactionHistory);
+        res.data.put("trHistory", transactionHistory);
         return res;
     }
 
 
-    @RequestMapping("/findAllExHistory")
+    @RequestMapping("/trial")
     @ResponseBody
     public Object findAllExHistory(@RequestBody JSONObject jsonObj) {
         //        创建响应类
@@ -98,12 +98,11 @@ public class HistoryController {
             limit.put(entry.getKey(), entry.getValue());
         }
 
-        Page page_num = new Page((Integer) limit.get("page_num_start"),(Integer) limit.get("page_num_end"));
+        Page page_num = new Page((Integer) limit.get("page_num_start"), (Integer) limit.get("page_num_end"));
 
 
         ArrayList<ExperienceHistory> ExperienceHistory = transactionHistoryService.findExperienceHistory(page_num);
-
-        res.data.put("exHistory",ExperienceHistory);
+        res.data.put("exHistory", ExperienceHistory);
         return res;
     }
 

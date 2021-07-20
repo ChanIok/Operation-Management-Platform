@@ -1,5 +1,7 @@
 package com.hrm.service.ServiceImpl;
 
+import com.hrm.dao.SpecificationDao;
+import com.hrm.pojo.Page;
 import com.hrm.pojo.Specification;
 import com.hrm.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +20,31 @@ import java.util.List;
 public class SpecificationServiceImpl implements SpecificationService {
 
     @Autowired
-    private SpecificationService specificationService;
+    private SpecificationDao specificationDao;
 
     @Override
     public List<Specification> listSpecificationsByProductId(int product_id) {
-        return specificationService.listSpecificationsByProductId(product_id);
+        return specificationDao.listSpecificationsByProductId(product_id);
     }
 
+    @Override
+    public List<Specification> listSpecification(Page page) {
+        return specificationDao.listSpecification( page);
+    }
 
 
     @Override
     public int insertSpecification(Specification specification) {
-        return specificationService.insertSpecification(specification);
+        return specificationDao.insertSpecification(specification);
     }
 
     @Override
     public int deleteSpecification(Specification specification) {
-        return specificationService.deleteSpecification(specification);
+        return specificationDao.deleteSpecification(specification);
     }
 
     @Override
     public int updateSpecification(Specification specification) {
-        return specificationService.updateSpecification(specification);
+        return specificationDao.updateSpecification(specification);
     }
 }

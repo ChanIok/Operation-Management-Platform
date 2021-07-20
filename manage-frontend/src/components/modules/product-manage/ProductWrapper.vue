@@ -1,10 +1,12 @@
 <template>
-  <div></div>
+  <div id="trader-manage-wrapper">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "LayOutMain",
+  name: "TradeManage",
   data() {
     return {};
   },
@@ -15,4 +17,8 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
+#trader-manage-wrapper {
+  width: 100%;
+  height: 100%;
+}
 </style>

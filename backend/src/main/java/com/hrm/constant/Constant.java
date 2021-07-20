@@ -7,6 +7,8 @@ package com.hrm.constant;
  * @Time 21:05
  */
 public interface Constant {
+    int ADMIN = 0;      //管理员
+    int SALESPERSON = 1;      //业务员
 
     int DOMESTIC_USER = 9;      //普通用户权限
 

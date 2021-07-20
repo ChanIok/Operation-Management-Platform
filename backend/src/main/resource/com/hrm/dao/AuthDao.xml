@@ -26,7 +26,7 @@
     </select>
 
 
-    <select id="findByPermission" parameterType="String" resultType="String">
+    <select id="getPermissionByUsername" parameterType="String" resultType="int">
         select permission from user where username = #{username}
     </select>
 
