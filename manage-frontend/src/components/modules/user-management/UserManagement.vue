@@ -6,7 +6,7 @@
         :data="tableData"
         highlight-current-row
         @current-change="handleCurrentChange"
-        style="width: 100%; height: 600px; font-size: 16px"
+        style="width: 100%; height: 100%; font-size: 16px"
         :row-style="{ height: '78px' }"
       >
         <el-table-column property="user_id" label="用户id"> </el-table-column>
@@ -14,13 +14,12 @@
         <el-table-column property="permission_cn" label="用户权限">
         </el-table-column>
       </el-table>
-
-      <div id="index-wrapper">
-        <div class="index">
-          <i class="el-icon-caret-left page" @click="page_up()"></i>
-          <span class="page">{{ pageIndex }}</span>
-          <i class="el-icon-caret-right page" @click="page_down()"></i>
-        </div>
+    </div>
+    <div id="index-wrapper">
+      <div class="index">
+        <i class="el-icon-caret-left page" @click="page_up()"></i>
+        <span class="page">{{ pageIndex }}</span>
+        <i class="el-icon-caret-right page" @click="page_down()"></i>
       </div>
     </div>
   </div>
@@ -30,6 +29,8 @@
 #userList {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   #table-wrapper {
     width: 100%;
     height: calc(100% - 65px);

@@ -152,21 +152,17 @@ public class UserController {
 
             Page page_num = new Page((Integer) limit.get("page_num_start"),(Integer) limit.get("page_num_end"));
 
-
             ArrayList<UserList> userList = userService.findUserList(page_num);
             res.code = 0;
             res.data.put("message","返回用户列表成功");
             res.data.put("datalist",userList);
-
 
         } catch (Exception e) {
             e.printStackTrace();
             res.code = 0;
             res.data.put("message","返回用户列表失败");
             res.data.put("datalist",null);
-
         }
-
         return res;
     }
 }
